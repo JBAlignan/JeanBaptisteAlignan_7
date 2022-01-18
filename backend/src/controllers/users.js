@@ -1,7 +1,8 @@
 // Importation de l'ORM Sequelize et des schémas de données nécessaires
-const User = require('../models/users');
-const Sequelize = db.Sequelize
-//Importation de bcrypt pour le hashage du mot de passe.
+const db = require('../models/index');
+// Importation du modèle User.
+const { User } = db.sequelize.models;
+// Importation de bcrypt pour le hashage du mot de passe.
 const bcrypt = require('bcrypt');
 // Importation du package jsonwebtoken pour la création et la vérification des tokens
 const jwt = require('jsonwebtoken')
@@ -24,7 +25,7 @@ const jwt = require('jsonwebtoken')
             .catch(error => res.status(500).json({ error }));
     };
 
-//Connection d'un utilisateur.
+// Connection d'un utilisateur.
     exports.login = (req, res, next) => {
         User.findOne({ email: req.body.email }) //Recherche de l'email dans la BDD.
             .then(user => {
@@ -49,3 +50,40 @@ const jwt = require('jsonwebtoken')
             })
             .catch(error => res.status(500).json({ error }));
     };
+
+// Trouver un utilisateur.
+    exports.findUser = (req, res, next) => {
+        User.findOne({ where: { id: req.params.id } })
+            .then (user => res.status(200).json({ user }))
+            .catch (error => res.status(404).json({ error }))
+    }
+
+// Trouver tous les utilisateurs.
+    exports.findAllUsers = (req, res, next) => {
+        User.findAll();
+    }
+
+// Mise à jour d'un compte utilisateur.
+    exports.updateUser = (req, res, next) => {
+        User.set({
+            firstName: req.params.firstName,
+            lastName: req.params.lastName,
+            email: req.params.email,
+            password: req.params.password
+        })
+        User.save()
+    }
+
+//Suppression d'un compte utilisateur.
+    exports.deleteUser = async (req, res, next) => {
+        try {
+        await User.findOne({ where: { id: req.body.id } });
+        if (User === null) {
+            res.status(401).json({ error: 'Utilisateur inconnu' });
+        } else {
+            await User.softDestroy()
+            res.status(200).json({ message: 'Compte supprimé' })
+        }
+    }
+        catch (error) { res.status(400).json({ error })}
+    }

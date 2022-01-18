@@ -1,21 +1,7 @@
 //Importation du package HTTP de Node; permet la création du serveur.
 const http = require('http');
-const cors = require("cors");
 //Importation du contenu de app.js.
 const app = require('./app');
-const express = require('express');
-
-// const app = express();
-
-// Middleware global pour éviter erreur CORS
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
-
-app.use(cors(corsOptions));
-
-
-
 
 const normalizePort = val => {
   const port = parseInt(val, 10);

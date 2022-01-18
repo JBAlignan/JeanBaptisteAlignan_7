@@ -11,7 +11,8 @@
     "express",
     "sequelize",
     "mysql",
-    "dotenv"
+    "dotenv",
+    "nodemon"
   ],
   "author": "Jean-Baptiste Alignan",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "sequelize": "^6.12.0-beta.3"
   },
   "devDependencies": {
+    "nodemon": "^2.0.15",
     "sequelize-cli": "^6.3.0"
   }
 }

@@ -1,9 +1,11 @@
 // Importation d'Express
 const express = require('express');
-
 // Importation de Cors (pour éviter erreur CORS)
 const cors = require("cors");
-
+//Importation de path; donne accès à notre système de fichier.
+const path = require('path');
+//Importation des routes.
+const userRoutes = require('./src/routes/users');
 // Variables d'environnement pour éviter l'accès à des données sensibles.
 require('dotenv').config();
 
@@ -24,7 +26,8 @@ app.use(cors());
 app.use(express.json());
 
 
-//Importation de la route Users.
-const userRoutes = require('./src/routes/user')
-// 
-app.use('/api/users', userRoutes);
+//Enregistrement des routes.
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/api/auth', userRoutes);
+
+module.exports = app;
