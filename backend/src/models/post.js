@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      //Association Post/User, ForeignKey (userId) dans la table User, pour la publication.
+      //Association Post/User, ForeignKey (userId) dans la table Post (target).
       Post.belongsTo(models.User, { foreignKey: 'userId' });
       //Association Post/Commentaire, foreignKey (postId) dans la table comments.
-      Post.hasMany(models.Comments)
+      Post.hasMany(models.Comments, { foreignKey: 'postId' })
       //Association Post/User via tables de liaison Likes/Dislikes.
       Post.belongsToMany(models.User, { through: 'likes' });
       Post.belongsToMany(models.User, { through: 'dislikes' });

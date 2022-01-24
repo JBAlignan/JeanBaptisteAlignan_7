@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       //Association User/commentaire, ForeignKey (userId) dans la table User
       Comments.belongsTo(models.User, { foreignKey: 'userId' })
       //Association Post/commentaire, ForeignKey (postId) dans la table post
-      Comments.belongsTo(models.Post, { foreignKey: 'postId' }) 
+      Comments.belongsTo(models.Post, { foreignKey: 'postId' })
     }
   };
 
