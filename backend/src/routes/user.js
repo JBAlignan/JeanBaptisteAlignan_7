@@ -9,12 +9,12 @@ const userCtrl = require('../controllers/user');
 
 
 // Routes pour l'envoi du schéma rempli au serveur.
-router.post('/signup', userCtrl.signup);
-router.post('/login', userCtrl.login);
-router.get('/:id', userCtrl.findUser);
+router.post('/user/login', userCtrl.login);
+router.post('/user/signup', userCtrl.signup);
+router.get('/user/:id', userCtrl.findUser);
 router.get('/', userCtrl.findAllUsers);
-router.put('/:id', auth, userCtrl.updateUser);
-router.delete('/:id', auth, userCtrl.deleteUser);
+router.put('/user/:id', auth, userCtrl.updateUser);
+router.delete('/user/:id', auth, userCtrl.deleteUser);
 
 
 // Exportation de la route.

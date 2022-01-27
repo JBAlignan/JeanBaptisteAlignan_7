@@ -11,14 +11,20 @@ const { Post } = db.sequelize.models;
     
     //--Création d'une publication.
     exports.createPost = (req, res, next) => {
-        // const postObject = JSON.parse(req.body.post)
+        let postObject = req.body;
+
+        if(req.file) {
+            postObject = JSON.parse(req.body.post);
+            let fileUrl;
+            fileUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+            postObject.imageUrl = JSON.parse(fileUrl);
+        }
+
         Post.create({
-            userId: req.body.userId,
-            content: req.body.content,
-            imageUrl: req.body.imageUrl,
-            likesCount: req.body.likesCount,
-            dislikesCount: req.body.dislikesCount
+            ...postObject,
+
         })
+
         .then(post => res.status(201).json(post))
         .catch(error => res.status(401).json({ error: error }))
     }

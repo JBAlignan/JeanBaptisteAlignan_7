@@ -15,20 +15,24 @@ module.exports = (sequelize, DataTypes) => {
       //Association Post/Commentaire, foreignKey (postId) dans la table comments.
       Post.hasMany(models.Comments, { foreignKey: 'postId' })
       //Association Post/User via tables de liaison Likes/Dislikes.
-      Post.belongsToMany(models.User, { through: 'likes' });
-      Post.belongsToMany(models.User, { through: 'dislikes' });
+      // Post.belongsToMany(models.User, { through: 'likes' });
+      // Post.belongsToMany(models.User, { through: 'dislikes' });
     }
   };
 
   Post.init({
-    userId: DataTypes.INTEGER,
+    userId: {
+     type: DataTypes.INTEGER,
+     allowNull: false
+    },
     content: DataTypes.TEXT,
-    imageUrl: DataTypes.STRING,
+    imageUrl: DataTypes.TEXT,
     likesCount: DataTypes.INTEGER,
     dislikesCount: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Post',
   });
+
   return Post;
 };

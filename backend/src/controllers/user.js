@@ -82,6 +82,7 @@ const jwt = require('jsonwebtoken')
 
     // Mise à jour d'un compte utilisateur.
         exports.updateUser = (req, res, next) => {
+            console.log("Test du put")
             // Pourquoi necessité d'utiliser findOne() si on sélectionne le user à la ligne 90?
             // Hashing à voir.
             User.findOne({ where: { id: req.params.id } })

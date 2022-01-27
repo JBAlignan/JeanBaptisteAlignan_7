@@ -30,9 +30,7 @@ app.use(express.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 //Enregistrement des routes utilisateur.
-app.use('/api/auth', userRoutes);
-app.put('/api/auth/:id', userRoutes);
-app.delete('/api/auth/:id', userRoutes);
+app.use('/api/users', userRoutes);
 //Enregistrement des routes publications.
 app.use('/api/posts', postRoutes);
 app.put('/api/posts/:id', postRoutes);
