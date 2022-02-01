@@ -7,7 +7,7 @@ const auth = require('../middleware/auth');
 const commentCtrl = require('../controllers/comment');
 
 // Routes pour l'envoi du schéma rempli au serveur.
-router.post('/', commentCtrl.createComment);
+router.post('/posts/:id/comments', commentCtrl.createComment);
 
 
 module.exports = router;

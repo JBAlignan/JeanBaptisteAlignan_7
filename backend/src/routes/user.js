@@ -14,7 +14,7 @@ router.post('/user/signup', userCtrl.signup);
 router.get('/user/:id', userCtrl.findUser);
 router.get('/', userCtrl.findAllUsers);
 router.put('/user/:id', auth, userCtrl.updateUser);
-router.delete('/user/:id', auth, userCtrl.deleteUser);
+router.delete('/user/:id', userCtrl.deleteUser);
 
 
 // Exportation de la route.

@@ -50,12 +50,12 @@ const jwt = require('jsonwebtoken')
                                 return res.status(401).json({ error: 'Mot de passe incorrect' });
                             }
                             res.status(200).json({ //Si valide, retour de l'id de l'utilisateur et d'un token.
-                                userId: user._id,
+                                userId: user.id,
                                 token: jwt.sign( //Fonction sign encode un nouveau token.
-                                    { userId: user._id }, //Token contient l'ID en tant que payload.
-                                    'RANDOM_TOKEN_SECRET',  //Chaine secrète pour encoder le token.
+                                    { userId: user.id }, //Token contient l'ID en tant que payload.
+                                    `${process.env.TOKEN_KEY}`,  //Chaine secrète pour encoder le token.
                                     { expiresIn: '24h' }    //Durée de validité du token.
-                                )
+                                ),
                             });
                         })
                         .catch(error => res.status(500).json({ error }))
@@ -82,7 +82,6 @@ const jwt = require('jsonwebtoken')
 
     // Mise à jour d'un compte utilisateur.
         exports.updateUser = (req, res, next) => {
-            console.log("Test du put")
             // Pourquoi necessité d'utiliser findOne() si on sélectionne le user à la ligne 90?
             // Hashing à voir.
             User.findOne({ where: { id: req.params.id } })
@@ -113,10 +112,12 @@ const jwt = require('jsonwebtoken')
             User.findOne({ where: { id: req.params.id } })
                 .then(user => {
                     user.destroy ({
-                        where: { id: req.params.id }
+                        where: { id: req.params.id },
                     })
-                    .then(() => res.status(200).json({ message: 'Compte supprimée' }))
+                    .then(() => res.status(200).json({ message: 'Compte supprimé' }))
                     .catch(error => res.status(400).json({ error }));
                 })
                 .catch(error => res.status(500).json({ error }));
         };
+
+        // console.log(userId)

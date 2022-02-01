@@ -33,10 +33,8 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/users', userRoutes);
 //Enregistrement des routes publications.
 app.use('/api/posts', postRoutes);
-app.put('/api/posts/:id', postRoutes);
-app.delete('/api/posts/:id', postRoutes);
-//Enregistrement des routes publications.
-app.use('/api/posts/:id/comments', commentRoutes)
+//Enregistrement des routes de commentaires.
+app.use('/api', commentRoutes)
 
 
 module.exports = app;

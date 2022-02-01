@@ -1,7 +1,10 @@
 // Importation de l'ORM Sequelize et des schémas de données nécessaires
 const db = require('../models/index');
 // Importation du modèle Comment.
+const { Post } = db.sequelize.models;
 const { Comment } = db.sequelize.models;
+
+
 
 //--CRUD
 
@@ -9,9 +12,16 @@ const { Comment } = db.sequelize.models;
 
     //--Création d'un commentaire.
     exports.createComment = (req, res, next) => {
+        // let commentObject = req.body;
+        try{
+        Post.findOne({ where: { id: req.params.id } })
         Comment.create({
-            content: req.params.content
+            postId: req.params.id,
+            content: req.body.content,
+            userId: req.params.userId
         })
-        .then(comment => res.status(201).json(comment))
-        .catch(error => res.status(401).json({ error: error }))
+        res.status(201).json(Comment)
+        }
+        // .then(comment => res.status(201).json(comment))
+        catch(error) {res.status(401).json({ error: error })}
     }

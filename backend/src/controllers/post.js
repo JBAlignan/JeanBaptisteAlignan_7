@@ -3,6 +3,8 @@ const db = require('../models/index');
 // Importation du modèle Post.
 const { Post } = db.sequelize.models;
 
+const auth = require('../middleware/auth')
+
 
 
 //--CRUD
@@ -12,17 +14,18 @@ const { Post } = db.sequelize.models;
     //--Création d'une publication.
     exports.createPost = (req, res, next) => {
         let postObject = req.body;
-
-        if(req.file) {
-            postObject = JSON.parse(req.body.post);
-            let fileUrl;
-            fileUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-            postObject.imageUrl = JSON.parse(fileUrl);
-        }
+console.log(req.header.userId)
+        // if(req.file) {
+        //     postObject = JSON.parse(req.body.post);
+        //     let fileUrl;
+        //     fileUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+        //     postObject.imageUrl = JSON.parse(fileUrl);
+        // }
 
         Post.create({
             ...postObject,
-
+            userId: req.header.userId
+            
         })
 
         .then(post => res.status(201).json(post))
