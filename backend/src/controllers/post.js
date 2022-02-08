@@ -14,7 +14,7 @@ const auth = require('../middleware/auth')
     //--Création d'une publication.
     exports.createPost = (req, res, next) => {
         let postObject = req.body;
-console.log(req.header.userId)
+
         // if(req.file) {
         //     postObject = JSON.parse(req.body.post);
         //     let fileUrl;
@@ -24,7 +24,7 @@ console.log(req.header.userId)
 
         Post.create({
             ...postObject,
-            userId: req.header.userId
+            userId: 2
             
         })
 

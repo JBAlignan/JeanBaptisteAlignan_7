@@ -10,7 +10,7 @@ const postCtrl = require('../controllers/post');
 
 
 // Routes pour l'envoi du schéma rempli au serveur.
-router.post('/', multer, postCtrl.createPost);
+router.post('/', auth, multer, postCtrl.createPost);
 router.get('/', postCtrl.findAllPosts);
 router.get('/:id', multer, postCtrl.findOnePost);
 router.put('/:id', auth, multer, postCtrl.updatePost);
