@@ -79,6 +79,6 @@ const auth = require('../middleware/auth')
         .then((post)=> {
             post.destroy()
         })
-        .then(() => res.status(200).json({ message: 'Publication supprimée' })
-        .catch(error => res.status(400).json({ error })))
+        .then(() => res.status(200).json({ message: 'Publication supprimée' }))
+        .catch(error => res.status(400).json({ error }))
     }
