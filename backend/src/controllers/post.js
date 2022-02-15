@@ -2,6 +2,7 @@
 const db = require('../models/index');
 // Importation du modèle Post.
 const { Post } = db.sequelize.models;
+const fs = require('fs')
 
 const auth = require('../middleware/auth')
 
@@ -24,8 +25,7 @@ const auth = require('../middleware/auth')
 
         Post.create({
             ...postObject,
-            userId: 2
-            
+            // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         })
 
         .then(post => res.status(201).json(post))
@@ -80,5 +80,5 @@ const auth = require('../middleware/auth')
             post.destroy()
         })
         .then(() => res.status(200).json({ message: 'Publication supprimée' }))
-        .catch(error => res.status(400).json({ error }))
+        .catch(error => res.status(400).json({ message: "Non autorisé" }))
     }

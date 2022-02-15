@@ -2,6 +2,12 @@
 export default {
 	name: 'Header'
 }
+var app = new Vue({
+	el: "#app",
+	data: {
+		user: "JB"
+	}
+})
 </script>
 
 <template>

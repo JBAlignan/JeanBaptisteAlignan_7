@@ -19,7 +19,7 @@ const {db, Post, Comments} = require('../models/index');
                 userId: req.body.userId
             }))
         .then(comment => res.status(201).json(comment))
-        .catch(error => (res.status(401).json({ error: error })))
+        // .catch(error => (res.status(401).json({ error: error })))
     
         .catch(error) (res.status(401).json({ error: "Erreur à la publication" }))
     }
