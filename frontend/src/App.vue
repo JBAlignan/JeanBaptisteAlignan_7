@@ -1,44 +1,28 @@
-<!--JS-->
-<script>
-export default {
-  data() {
-    return {
-      count: 1
-    }
-  },
-
-  // `mounted` is a lifecycle hook which we will explain later
-  mounted() {
-    // `this` refers to the component instance.
-    console.log(this.count) // => 1
-
-    // data can be mutated as well
-    this.count = 2
-  }
-}
-
-</script>
-
-
-<!--HTML-->
 <template>
-<div id="app">
-		<!-- <nav>
-			<a href="/"><img src="./assets/icon-above-font-resized.png"></a>
-		</nav> -->
-    Count is: {{ count }}
-	</div>
+  <div id="app">
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  </div>
 </template>
 
+<script>
+import HelloWorld from './components/HelloWorld.vue'
 
+export default {
+  name: 'App',
+  components: {
+    HelloWorld
+  }
+}
+</script>
 
-<!--SCSS-->
 <style lang="scss">
-    nav {
-      width: 100%;
-      border: 1px solid black;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    } 
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 </style>

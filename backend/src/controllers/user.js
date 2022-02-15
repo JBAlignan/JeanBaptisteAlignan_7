@@ -34,7 +34,7 @@ const jwt = require('jsonwebtoken')
 
     // Connection d'un utilisateur.
         exports.login = (req, res, next) => {
-            //Recherche de l'email dans la BDD; Utilisation de l'option { where } (Sequelize) pour filtrer les requêtes
+            //Recherche de l'email dans la BDD; Utilisation de l'option { where } (Sequelize) pour filtrer les requêtes.
             User.findOne({ 
                 where: {
                     email: req.body.email 
@@ -82,18 +82,16 @@ const jwt = require('jsonwebtoken')
 
     // Mise à jour d'un compte utilisateur.
         exports.updateUser = (req, res, next) => {
-            // Pourquoi necessité d'utiliser findOne() si on sélectionne le user à la ligne 90?
-            // Hashing à voir.
             User.findOne({ where: { id: req.params.id } })
-            .then((user) => {
-                // let userObject = req.body;
-                user.update({
+            bcrypt.hash(req.body.password, 10)
+            .then((hash) => {
+                User.update({
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
                     email: req.body.email,
-                    password: req.body.password
+                    password: hash
                 }, { 
-                    where: { 
+                    where: {
                     id: req.params.id 
                     } 
                 })
@@ -119,5 +117,3 @@ const jwt = require('jsonwebtoken')
                 })
                 .catch(error => res.status(500).json({ error }));
         };
-
-        // console.log(userId)
