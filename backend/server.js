@@ -39,9 +39,11 @@ const errorHandler = error => {
   }
 };
 
+//Création du serveur.
 const server = http.createServer(app);
 
 server.on('error', errorHandler);
+//Lance le serveur.
 server.on('listening', () => {
   const address = server.address();
   const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;

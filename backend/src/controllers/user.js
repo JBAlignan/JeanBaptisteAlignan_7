@@ -21,7 +21,8 @@ const jwt = require('jsonwebtoken')
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
                         email: req.body.email,
-                        password: hash
+                        password: hash,
+                        admin: req.body.admin
                     })
                         .then(user => res.status(201).json(user))
                         .catch(error => res.status(401).json({ error: error }))

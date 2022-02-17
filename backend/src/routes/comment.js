@@ -8,11 +8,11 @@ const commentCtrl = require('../controllers/comment');
 const { route } = require('./user');
 
 // Routes pour l'envoi du schéma rempli au serveur.
-router.post('/posts/:id/comments', commentCtrl.createComment);
-router.get('/posts/:id/comments', commentCtrl.findAllComments);
-router.get('/posts/:id/comments/:id', commentCtrl.findOneComment);
-router.put('/posts/:id/comments/:id', commentCtrl.updateComment);
-router.delete('/posts/:id/comments/:id', commentCtrl.deleteComment);
+router.post('/', commentCtrl.createComment);
+router.get('/', commentCtrl.findAllComments);
+router.get('/:id', commentCtrl.findOneComment);
+router.put('/:id', commentCtrl.updateComment);
+router.delete('/:id', commentCtrl.deleteComment);
 
 
 

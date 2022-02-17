@@ -14,19 +14,16 @@ const auth = require('../middleware/auth')
     
     //--Création d'une publication.
     exports.createPost = (req, res, next) => {
-        let postObject = req.body;
-
-        // if(req.file) {
-        //     postObject = JSON.parse(req.body.post);
-        //     let fileUrl;
-        //     fileUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-        //     postObject.imageUrl = JSON.parse(fileUrl);
-        // }
-
+        
+        
         Post.create({
-            ...postObject,
-            // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        
+
+            userId: req.body.userId,
+            content: req.body.content,
+            imageUrl: req.body.imageUrl,
         })
+        // console.log(req.body)
 
         .then(post => res.status(201).json(post))
         .catch(error => res.status(401).json({ error: error }))
