@@ -1,6 +1,8 @@
 <template>
+<div>
   <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/>
+</div>
 </template>
 
 <script>
@@ -15,6 +17,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~@/assets/scss/vendors/bootstrap-vue/_custom";
 @import "~@/assets/scss/vendors/bootstrap-vue/index";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
