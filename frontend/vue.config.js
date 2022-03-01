@@ -1,6 +1,4 @@
-module.exports = {
-    configureWebpack: {
-    devtool: "eval-cheap-source-map",
-    },
-    }
-    
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
+  transpileDependencies: true
+})

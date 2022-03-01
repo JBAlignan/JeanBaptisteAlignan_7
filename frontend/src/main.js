@@ -1,21 +1,8 @@
-// import '@babel/polyfill'
-// import 'mutationobserver-shim'
-// import './plugins/bootstrap-vue'
 import { createApp } from 'vue'
 import App from './App.vue'
+
+// Importation de Bootstrap.
+import "bootstrap"
+import "bootstrap/dist/css/bootstrap.min.css"
+
 createApp(App).mount('#app')
-
-
-import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-
-// Import Bootstrap an BootstrapVue CSS files (order is important)
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-
-// Make BootstrapVue available throughout your project
-Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
-
-
