@@ -1,9 +1,9 @@
 <template>
-    <nav class="navbar fixed-bottom">
-    <figure class="container-fluid">
-        <img src="../assets/groupomaniaFooter.webp" />
-    </figure>
-    </nav>
+    <footer class="navbar mt-3">
+        <figure>
+            <img src="../assets/groupomaniaFooter.webp" />
+        </figure>
+    </footer>
 </template>
 
 <script>
@@ -16,9 +16,12 @@ export default {
 
 <style lang="scss">
 
-nav {
+footer{
     background-color: #122442;
-}
-
+ & figure {
+     width: 100%;
+    display: flex;
+    justify-content: center;
+ }}
 
 </style>

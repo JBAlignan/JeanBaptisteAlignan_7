@@ -1,6 +1,6 @@
 <template>
     <div class="row container">
-
+        <h1>Bonjour {{ User }}</h1>
         <div class="col-sm-6 g-4">
             <div class="card">
                 <div class="card-body">
@@ -27,7 +27,12 @@
 <script>
 
 export default {
-
+    name: 'PostsComponent',
+    data(){
+        return {
+            
+        }
+    }
 }
 
 </script>
