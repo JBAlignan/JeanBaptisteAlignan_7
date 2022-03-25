@@ -1,32 +1,30 @@
 <script>
+
+import axios from 'axios'
+
 export default {
-    name: 'PostsListComponent'
+    name: 'PostsListComponent',
+    data(){
+        return {
+            post: null,
+        }
+    },
+    mounted(){
+        axios
+        // Importance de 'http'; sinon, Network Error dans la console.
+        .get("http://localhost:3000/api/posts")
+        .then((response) => {
+            this.info = response.data;
+            // Boucle sur la table d'objets récupérés.
+            this.info.forEach((item) => {
+            console.log(item.content)
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    },
 }
-
-// import Vue from 'vue';
-// import axios from 'axios';
-
-// new Vue({
-//     el: '#app',
-//     data () {
-//         return {
-//             info: null
-//         }
-//     },
-//     created () {
-//         axios
-//         .get('localhost:3000/api/posts')
-//         .then(response => {
-//             console.log(response)
-//         })
-//         .catch( error => {
-//             console.log(error)
-//         })
-        
-        
-//         }
-//     })
-
 
 </script>
 
@@ -38,7 +36,7 @@ export default {
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Titre Poste 1</h5>
-                    <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium provident, omnis, vitae porro eius veritatis deserunt odio quam beatae ex non incidunt et. Totam nisi accusantium quam nihil, ut corporis?</p>
+                    <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, dicta? Quia nostrum, amet iste velit reiciendis quae dicta vero quos asperiores et consequuntur odit ea mollitia corrupti nisi at debitis.</p>
                     <router-link to="/publications/:id" class="btn btn-primary">Consulter</router-link>
                 </div>
             </div>

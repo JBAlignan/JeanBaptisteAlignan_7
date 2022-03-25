@@ -7,17 +7,17 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../components/FormComponent')
+    component: () => import('../views/HomeComponent')
   },
   {
     path: '/publications',
     name: 'PostsList',
-    component: () => import('../components/PostsListComponent')
+    component: () => import('../views/PostsListComponent')
   },
   {
   path: '/publications/:id',
   name: 'OnePost',
-  component: () => import('../components/OnePostComponent')
+  component: () => import('../views/OnePostComponent')
 }
 ]
 

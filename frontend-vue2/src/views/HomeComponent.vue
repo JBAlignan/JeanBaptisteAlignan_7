@@ -1,7 +1,14 @@
 <script>
-export default {
-    name: 'FormComponent'
-}
+
+// import axios from 'axios'
+
+// export default {
+//     name: 'HomeComponent',
+//     data() {
+
+//     }
+//     axios.post()
+// }
 </script>
 
 <template>
