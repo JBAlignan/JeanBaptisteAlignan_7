@@ -1,12 +1,13 @@
 <script>
-import HeaderComponent from "./views/HeaderComponent.vue";
-import FooterComponent from './views/FooterComponent.vue'
+import HeaderView from "./views/HeaderView.vue";
+import FooterView from './views/FooterView.vue';
+
 
 export default {
  name: 'App',
  components: {
-   HeaderComponent,
-   FooterComponent
+   HeaderView,
+   FooterView
  }
 }
 </script>
@@ -14,10 +15,10 @@ export default {
 
 <template>
   <div id="app">
-    <HeaderComponent />
+    <HeaderView />
     <!--Importation du "corps" de la page-->
     <router-view/>
-    <FooterComponent />
+    <FooterView />
   </div>
 </template>
 

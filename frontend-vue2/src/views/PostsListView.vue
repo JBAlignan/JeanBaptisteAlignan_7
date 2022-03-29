@@ -3,7 +3,7 @@
 import axios from 'axios'
 
 export default {
-    name: 'PostsListComponent',
+    name: 'PostsListView',
     data(){
         return {
             post: null,

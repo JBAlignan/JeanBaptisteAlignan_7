@@ -1,6 +1,15 @@
 <script>
 export default {
-    name: 'HeaderComponent'
+    name: 'HeaderView',
+    computed: {
+        isLoggedIn: function(){ return this.$store.getters.isAuthenticated}
+    },
+    methods: {
+        async logout (){
+            await this.$store.dispatch('LogOut')
+            this.$router.push('/login')
+        }
+    }
 }
 </script>
 
@@ -9,7 +18,9 @@ export default {
         <div class="container-fluid">
                 <img src="../assets/groupomaniaLogoSm.png" class ="img-fluid" alt="Groupomania" />
                 <div class='row'>
-                <router-link to="/">Déconnexion</router-link>
+                <router-link to="/publications">Publications</router-link>
+                <button v-show="logout" >Déconnexion</button>
+
                 </div>
         </div>
     </header>
