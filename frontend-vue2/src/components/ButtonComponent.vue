@@ -2,14 +2,19 @@
 
 export default{
     name: 'ButtonComponent',
-    props: ['link', 'text']
+    props: {
+    text: {
+    type: String,
+    required: true
+  }
+}
 }
 
 </script>
 
 
 <template>
-    <router-link to="link">{{ text }}</router-link>
+    <div >Valider</div>
 </template>
 
 <style lang="scss">

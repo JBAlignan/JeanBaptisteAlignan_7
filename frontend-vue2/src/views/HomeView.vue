@@ -1,14 +1,6 @@
 <script>
 
-// import axios from 'axios'
 
-// export default {
-//     name: 'HomeComponent',
-//     data() {
-
-//     }
-//     axios.post()
-// }
 import ButtonComponent from '../components/ButtonComponent'
 import { mapActions } from 'vuex'
 
@@ -24,11 +16,21 @@ export default {
         lastName: "",
         email: "",
         password: ""
-      }
+      },
+      showError: false
     }
   },
   methods: {
-    ...mapActions([])
+    ...mapActions(["HomeView"]),
+    async submit() {
+      try {
+        await this.HomeView(this.form);
+        this.$router.push("/publications");
+        this.showError = false
+      } catch (error) {
+        this.showError = true
+      }
+    }
   }
 }
 
@@ -78,8 +80,8 @@ export default {
           <label for="password" class="form-label">Mot de passe</label>
           <input type="password" name="password" class="form-control" id="password" v-model="form.password">
         </div>
-        <!-- <router-link to="/publications" type="submit" class="btn btn-primary">Valider</router-link> -->
-        <ButtonComponent to='/publications' type="submit" class="btn btn-primary" text="Valider" />
+        <router-link to="/publications" type="submit" class="btn btn-primary">Valider</router-link>
+        <!-- <ButtonComponent to='/publications' type="submit" class="btn btn-primary"  /> -->
         
       </fieldset>
     </form>

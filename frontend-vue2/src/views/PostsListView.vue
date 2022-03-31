@@ -1,9 +1,23 @@
 <script>
 
-import axios from 'axios'
+// Gestion de la récupérations des données dans le store.
+import { mapGetters } from 'vuex'
 
+// export default {
+//     computed: {
+//         ...mapState(['firstName', 'lastName'])
+//     }
+// }
+
+// Gestion de l'affichage des publications de l'API.
+import axios from 'axios'
 export default {
     name: 'PostsListView',
+    // Propriétés calculées; contient les données et leurs manipulations.
+        computed: {
+        ...mapGetters(['nameDisplay'])
+    },
+
     data(){
         return {
             post: null,
@@ -30,7 +44,7 @@ export default {
 
 <template>
         <div class="row container">
-        <h1>Bonjour</h1>
+        <h1>Bonjour {{ nameDisplay }}</h1>
 
         <div class="col-sm-6 g-4">
             <div class="card">

@@ -1,16 +1,31 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
-import auth from './modules/auth'
 
-// Chargement de Vuex.
+
+// Méthode ajoutant une fonctionnalité globale à notre instance de Vue.
 Vue.use(Vuex)
 
-// Création d'un store pour les données.
-export default new Vuex.Store({
 
-  modules: {
-    auth
+export default new Vuex.Store({
+  // State, contient les données (comparable à data dans Vue).
+  state: {
+    firstName: 'Jean-Baptiste',
+    lastName: 'Alignan',
+    // email: '',
+    // token: ''
   },
-  plugins: [createPersistedState()]
-});
+  // Getters, contient les fonctions qui manipulent les données (comparable à computed dans Vue).
+  getters: {
+    nameDisplay (state){
+      return `${state.firstName} ${state.lastName}`
+    }
+  },
+  // Permet de mettre à jour 
+  mutations: {
+
+  },
+  actions: {
+
+  }
+})
+
