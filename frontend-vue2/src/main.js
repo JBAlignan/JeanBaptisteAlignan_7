@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 // Configuration d'Axios pour les requêtes.
 // L'instruction suivante permet de définir  Axios comme outil par défaut pour gérer les requêtes.
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = false
 // Instruction créant l'URL par defaut pour toutes les requêtes.
 // Plus besoin de préciser l'URL pour le reste du code, seulement les endpoints.
 axios.defaults.baseURL = 'http://localhost:3000/api'
