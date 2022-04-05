@@ -1,40 +1,3 @@
-<script>
-
-
-import ButtonComponent from '../components/ButtonComponent'
-import { mapActions } from 'vuex'
-
-export default {
-  name: 'HomeView',
-  component: {
-    ButtonComponent
-  },
-  data() {
-    return {
-      form: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: ""
-      },
-      showError: false
-    }
-  },
-  methods: {
-    ...mapActions(["HomeView"]),
-    async submit() {
-      try {
-        await this.HomeView(this.form);
-        this.$router.push("/publications");
-        this.showError = false
-      } catch (error) {
-        this.showError = true
-      }
-    }
-  }
-}
-
-</script>
 
 <template>
   <main class="row justify-content-center container-fluid">
@@ -43,18 +6,18 @@ export default {
   <!--Formulaire de connexion à un compte-->
 
   <!--Positionnement du form sur 10 col, 5 col en md (Moyenne, > ou égal à 768px) et vertical gutters à 4em-->
-    <form method="post" action=""  class="col-10 col-lg-5 gy-4 mw-80">
+    <form method="post" @submit.prevent="loginSubmit" class="col-10 col-lg-5 gy-4 mw-80">
       <fieldset class="rounded py-4 px-4">
         <legend>Connexion à un compte</legend>
         <div class="mb-3 row">
           <label for="emailLogin" class="form-label">Adresse email</label>
-          <input type="email" name="emailLogin" class="form-control" id="emailLogin">
+          <input type="email" name="emailLogin" class="form-control" id="emailLogin" v-model="email">
         </div>
         <div class="mb-3 row ">
           <label for="passwordLogin" class="form-label">Mot de passe</label>
-          <input type="password" name="passwordLogin" class="form-control" id="passwordLogin">
+          <input type="password" name="passwordLogin" class="form-control" id="passwordLogin" v-model="password">
         </div>
-      <router-link to="/publications" type="submit" class="btn btn-primary">Connexion</router-link>
+      <router-link to="" type="submit" class="btn btn-primary">Connexion</router-link>
       </fieldset>
     </form>
 
@@ -66,21 +29,21 @@ export default {
         <legend>Créer un compte</legend>
         <div class="mb-3 row">
           <label for="firstName" class="form-label">Prénom</label>
-          <input type="text" name="firstName" class="form-control" id="firstName" v-model="form.firstName">
+          <input type="text" name="firstName" class="form-control" id="firstName" v-model="firstName">
         </div>
         <div class="mb-3 row">
           <label for="lastName" class="form-label">Nom</label>
-          <input type="text" name="lastName" class="form-control" id="lastName" v-model="form.lastName">
+          <input type="text" name="lastName" class="form-control" id="lastName" v-model="lastName">
         </div>
         <div class="mb-3 row">
           <label for="email" class="form-label">Adresse email</label>
-          <input type="email" name="email" class="form-control" id="email" v-model="form.email">
+          <input type="email" name="email" class="form-control" id="email" v-model="email">
           </div>
         <div class="mb-3 row">
           <label for="password" class="form-label">Mot de passe</label>
-          <input type="password" name="password" class="form-control" id="password" v-model="form.password">
+          <input type="password" name="password" class="form-control" id="password" v-model="password">
         </div>
-        <router-link to="/publications" type="submit" class="btn btn-primary">Valider</router-link>
+        <router-link to="/publications" type="submit" class="btn btn-primary">Connexion</router-link>
         <!-- <ButtonComponent to='/publications' type="submit" class="btn btn-primary"  /> -->
         
       </fieldset>
@@ -89,6 +52,50 @@ export default {
   </main>
 </template>
 
+<script>
+
+// import ButtonComponent from '../components/ButtonComponent'
+import { mapState, mapActions } from 'vuex'
+
+export default {
+  name: 'HomeView',
+  // component: {
+  //   ButtonComponent
+  // },
+  data() {
+    return {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+    }
+  },
+  computed: {
+    ...mapState([
+      'loginError',
+      'accessToken'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'doLogin'
+    ]),
+    loginSubmit() {
+      this.doLogin({
+        email: this.email,
+        password: this.password
+      })
+    },
+    ...mapActions([
+      'fetchAccessToken'
+      ]),
+  },
+  created() {
+    this.fetchAccessToken();
+  }
+}
+
+</script>
 
 <style lang="scss">
 fieldset{

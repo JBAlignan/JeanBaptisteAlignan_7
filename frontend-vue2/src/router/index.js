@@ -28,7 +28,7 @@ const routes = [
   path: '/publications/:id',
   name: 'OnePost',
   component: () => import('../views/OnePostView')
-}
+  }
 ]
 
 const router = new VueRouter({
