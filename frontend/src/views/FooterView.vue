@@ -1,3 +1,9 @@
+<script>
+export default {
+    name: 'FooterView'
+}
+</script>
+
 <template>
     <footer class="navbar mt-3">
         <figure>
@@ -6,20 +12,12 @@
     </footer>
 </template>
 
-<script>
-
-export default {
-    name: 'FooterComponent'
-}
-
-</script>
-
 <style lang="scss">
 
 footer{
     background-color: #122442;
  & figure {
-     width: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
  }}
