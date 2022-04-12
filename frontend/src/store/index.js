@@ -39,12 +39,14 @@ export default new Vuex.Store({
   // Coordonne la logique des mutations. Comparable à la propriété methods.
   actions: {
     // Accès d'Axios aux posts.
-    getPosts({ commit }) {
+      getPosts({ commit }) {
       axios.get("/posts")
         .then(response => {
         commit('SET_POSTS', response.data)
       })
-    },
+      },
+
+    
     
     // Envoi d'Axios de la requête de connexion à l'API.
       doLogin({ commit }, loginData) {

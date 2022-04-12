@@ -34,7 +34,7 @@ export default {
                     <div class="card-body" v-for='post in posts' :key='post.id'>
                         <!-- <h5 class="card-title">Titre Poste 1</h5> -->
                         <p class="card-text">{{ post.content }}</p>
-                        <router-link to="/publications/:id" class="btn btn-primary">Consulter</router-link>
+                        <router-link :to="{ name:'OnePost', params: { id: post.id } }" class="btn btn-primary">Consulter</router-link>
                     </div>
                 </div>
             </div>

@@ -1,47 +1,25 @@
-import { createApp } from 'vue'
+import Vue from 'vue'
 import App from './App.vue'
-
+import router from './router'
+// Store, sorte de data global.
+import store from './store'
+import axios from 'axios'
 
 // Importation de Bootstrap.
 import "bootstrap"
 import "bootstrap/dist/css/bootstrap.min.css"
-import './assets/css/app.css'
 
-// Importation de VueRouter.
-import * as VueRouter from 'vue-router'
-import HeaderComponent from './components/HeaderComponent.vue'
-import FooterComponent from './components/FooterComponent.vue'
-import FormComponent from './components/FormComponent.vue'
-import PostsComponent from './components/PostsComponent'
+// Configuration d'Axios pour les requêtes.
+// L'instruction suivante permet de définir  Axios comme outil par défaut pour gérer les requêtes.
+// axios.defaults.withCredentials = false
+// Instruction créant l'URL par defaut pour toutes les requêtes.
+// Plus besoin de préciser l'URL pour le reste du code, seulement les endpoints.
+axios.defaults.baseURL = 'http://localhost:3000/api'
 
+Vue.config.productionTip = false
 
-// Configuration de VueRouter
-const router = VueRouter.createRouter({
-    history: VueRouter.createWebHistory(),
-    routes: [
-        {
-            path: '/',
-            name: 'Header',
-            component: HeaderComponent
-        },
-        {
-            path: '/',
-            name: 'Footer',
-            component: FooterComponent
-        },
-        {
-            path: '/',
-            name: 'LoginSignUp',
-            component: FormComponent
-        },
-        {
-            path: '/publications',
-            name: 'PostsComponent',
-            component: PostsComponent
-        }
-    ]
-})
-
-const app = createApp(App)
-app.use(router).mount('#app')
-// app.mount('app')
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')

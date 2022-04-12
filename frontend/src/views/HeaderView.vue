@@ -16,11 +16,10 @@ export default {
 <template>
     <header>
         <div class="container-fluid">
+                
                 <img src="../assets/groupomaniaLogoSm.png" class ="img-fluid" alt="Groupomania" />
                 <div class='row'>
-                <router-link to="/publications">Publications</router-link>
-                <button v-show="logout" >Déconnexion</button>
-
+                    <button v-show="logout" >Déconnexion</button>
                 </div>
         </div>
     </header>

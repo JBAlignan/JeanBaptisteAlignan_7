@@ -6,7 +6,7 @@
   <!--Formulaire de connexion à un compte-->
 
   <!--Positionnement du form sur 10 col, 5 col en md (Moyenne, > ou égal à 768px) et vertical gutters à 4em-->
-    <form method="post" @submit.prevent="loginSubmit" class="col-10 col-lg-5 gy-4 mw-80">
+    <form method="POST" @submit.prevent="loginSubmit" class="col-10 col-lg-5 gy-4 mw-80">
       <fieldset class="rounded py-4 px-4">
         <legend>Connexion à un compte</legend>
         <div class="mb-3 row">
@@ -21,6 +21,8 @@
       </fieldset>
     </form>
 
+
+    <!-- <FormComponent></FormComponent> -->
 <!--Formulaire de création de compte-->
 
 <!--Positionnement du form sur 10 col, 5 col en md (Moyenne, > ou égal à 768px) et vertical gutters à 4em-->
@@ -55,13 +57,14 @@
 <script>
 
 // import ButtonComponent from '../components/ButtonComponent'
+import FormComponent from '../components/FormComponent'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'HomeView',
-  // component: {
-  //   ButtonComponent
-  // },
+  component: {
+    FormComponent
+  },
   data() {
     return {
         firstName: '',

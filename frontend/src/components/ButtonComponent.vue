@@ -1,3 +1,10 @@
+
+
+
+<template>
+    <div >Valider</div>
+</template>
+
 <script>
 
 export default{
@@ -11,11 +18,6 @@ export default{
 }
 
 </script>
-
-
-<template>
-    <div >Valider</div>
-</template>
 
 <style lang="scss">
 
