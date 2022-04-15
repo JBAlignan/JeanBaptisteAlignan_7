@@ -51,7 +51,7 @@
         },
         methods:{
             submitSignUp(){
-                axios.post('/signup', this.form)
+                axios.post('http://localhost:3000/api/signup', this.form)
                 .then((response) => {
                     console.log(response.data.form)
                 })
