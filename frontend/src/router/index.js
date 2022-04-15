@@ -10,14 +10,14 @@ const routes = [
     component: () => import('../views/HomeView')
   },
   {
+    path: '/signup',
+    name: 'SignUp',
+    component: () => import('../views/SignUpView')
+  },
+  {
     path: '/profil/:id',
     name: 'Profil',
     component: () => import ('../views/ProfilView')
-  },
-  {
-    path: '/profil/:id/update',
-    name: 'UpdateProfil',
-    component: () => import ('../views/UpdateProfil')
   },
   {
     path: '/publications',

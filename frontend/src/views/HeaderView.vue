@@ -1,18 +1,3 @@
-<script>
-export default {
-    name: 'HeaderView',
-    computed: {
-        isLoggedIn: function(){ return this.$store.getters.isAuthenticated}
-    },
-    methods: {
-        async logout (){
-            await this.$store.dispatch('LogOut')
-            this.$router.push('/login')
-        }
-    }
-}
-</script>
-
 <template>
     <header>
         <div class="container-fluid">
@@ -24,6 +9,21 @@ export default {
         </div>
     </header>
 </template>
+
+<script>
+    export default {
+        name: 'HeaderView',
+        computed: {
+            isLoggedIn: function(){ return this.$store.getters.isAuthenticated}
+        },
+        methods: {
+            async logout (){
+                await this.$store.dispatch('LogOut')
+                this.$router.push('/login')
+            }
+        }
+    }
+</script>
 
 <style lang="scss">
 header {

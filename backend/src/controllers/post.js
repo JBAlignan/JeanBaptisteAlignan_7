@@ -14,17 +14,11 @@ const auth = require('../middleware/auth')
     
     //--Création d'une publication.
     exports.createPost = (req, res, next) => {
-        
-        
         Post.create({
-        
-
             userId: req.body.userId,
             content: req.body.content,
             imageUrl: req.body.imageUrl,
         })
-        // console.log(req.body)
-
         .then(post => res.status(201).json(post))
         .catch(error => res.status(401).json({ error: error }))
     }

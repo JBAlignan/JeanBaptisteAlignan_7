@@ -21,12 +21,14 @@
       </fieldset>
     </form>
 
+    <router-link to="/signup" type="submit" class="btn btn-success">Cr&#233;er un compte</router-link>
 
-    <!-- <FormComponent></FormComponent> -->
+
+
 <!--Formulaire de création de compte-->
 
 <!--Positionnement du form sur 10 col, 5 col en md (Moyenne, > ou égal à 768px) et vertical gutters à 4em-->
-    <form method="POST" action="" class="col-10 col-lg-5 gy-4">
+    <!-- <form method="POST" action="" class="col-10 col-lg-5 gy-4">
       <fieldset class="rounded py-4 px-4">
         <legend>Créer un compte</legend>
         <div class="mb-3 row">
@@ -45,30 +47,24 @@
           <label for="password" class="form-label">Mot de passe</label>
           <input type="password" name="password" class="form-control" id="password" v-model="password">
         </div>
-        <router-link to="/publications" type="submit" class="btn btn-primary">Connexion</router-link>
+        <router-link to="/publications" type="submit" class="btn btn-primary">Connexion</router-link> -->
         <!-- <ButtonComponent to='/publications' type="submit" class="btn btn-primary"  /> -->
         
-      </fieldset>
-    </form>
+      <!-- </fieldset> -->
+    <!-- </form> -->
 
   </main>
 </template>
 
 <script>
 
-// import ButtonComponent from '../components/ButtonComponent'
-import FormComponent from '../components/FormComponent'
+
 import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'HomeView',
-  component: {
-    FormComponent
-  },
   data() {
     return {
-        firstName: '',
-        lastName: '',
         email: '',
         password: '',
     }

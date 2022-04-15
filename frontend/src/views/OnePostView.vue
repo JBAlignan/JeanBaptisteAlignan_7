@@ -1,24 +1,3 @@
-<script>
-// import CardComponent from '../components/CardComponent';
-
-export default {
-    name: 'OnePostView',
-    data(){
-        return {
-        }
-    },
-    computed: {
-        posts() {
-            return this.$store.state.posts
-        }
-    },
-    mounted() {
-        this.$store.dispatch("getPosts")
-    }
-}
-</script>
-
-
 <template>
     <div class="card" style="width: 18rem;">
         <div class="card-body">
@@ -48,6 +27,27 @@ export default {
 <!-- <CardComponent title="Titre de la Card"  /> -->
 
 </template>
+
+<script>
+// import CardComponent from '../components/CardComponent';
+
+    export default {
+        name: 'OnePostView',
+        data(){
+            return {
+            }
+        },
+        computed: {
+            posts() {
+                return this.$store.state.posts
+            }
+        },
+        mounted() {
+            this.$store.dispatch("getPosts")
+        }
+    }
+    
+</script>
 
 
 <style lang="scss">

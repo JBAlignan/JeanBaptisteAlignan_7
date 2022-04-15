@@ -1,11 +1,3 @@
-<script>
-// import { defineComponent } from '@vue/composition-api'
-
-export default {
-  name: 'ProfilView'
-}
-</script>
-
 <template>
 
 <div class="card mb-3" style="max-width: 540px;">
@@ -26,6 +18,15 @@ export default {
 </div>
     
 </template>
+
+<script>
+// import { defineComponent } from '@vue/composition-api'
+
+  export default {
+    name: 'ProfilView'
+  }
+  
+</script>
 
 <style lang="scss">
 
