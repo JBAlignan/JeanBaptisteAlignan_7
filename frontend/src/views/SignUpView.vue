@@ -23,7 +23,7 @@
           <label for="password" class="form-label">Mot de passe</label>
           <input type="password" name="password" class="form-control" id="password" v-model="password">
         </div>
-        <router-link to="" type="submit" class="btn btn-success">S&#39;inscrire</router-link>
+        <router-link to="" type="submit" class="btn btn-success"  @click="submitSignUp">S&#39;inscrire</router-link>
       </fieldset>
 
     </form>
@@ -41,26 +41,36 @@
 
         data() {
             return {
-                form: {
+                
                     firstName: '',
                     lastName: '',
                     email: '',
                     password: '',
-                }
+                
             }
         },
         methods:{
             submitSignUp(){
-                axios.post('http://localhost:3000/api/signup', this.form)
+                 axios.post('http://localhost:3000/api/signup',
+                {
+                  firstName: this.firstName,
+                  lastName: this.lastName,
+                  email: this.email,
+                  password: this.password
+                 
+                 })
                 .then((response) => {
-                    console.log(response.data.form)
+                    console.log(response)
                 })
                 .catch(error => {
                     error
                 })
-            }
+                }
         }
     }
+            
+        
+    
 
 </script>
 
