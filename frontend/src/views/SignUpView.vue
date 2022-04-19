@@ -3,7 +3,7 @@
     <main class="row justify-content-center container-fluid">
         <h1 class="text-center p-0">Réseau social</h1>
 
-    <form method="POST" action="" class="col-10 col-lg-5 gy-4">
+    <form method="POST" action="http://localhost:3000/api/users/signup" class="col-10 col-lg-5 gy-4">
 
       <fieldset class="rounded py-4 px-4">
         <legend>Créer un compte</legend>
@@ -23,7 +23,7 @@
           <label for="password" class="form-label">Mot de passe</label>
           <input type="password" name="password" class="form-control" id="password" v-model="password">
         </div>
-        <router-link to="" type="submit" class="btn btn-success"  @click="submitSignUp">S&#39;inscrire</router-link>
+        <router-link to="" type="submit" class="btn btn-success">S&#39;inscrire</router-link>
       </fieldset>
 
     </form>
@@ -50,8 +50,12 @@
             }
         },
         methods:{
+            getToken(){
+              fetch(localStorage.getItem('token'))
+            },
+
             submitSignUp(){
-                 axios.post('http://localhost:3000/api/signup',
+                 axios.post('http://localhost:3000/api/users/signup',
                 {
                   firstName: this.firstName,
                   lastName: this.lastName,
@@ -63,14 +67,11 @@
                     console.log(response)
                 })
                 .catch(error => {
-                    error
+                    console.log(error)
                 })
                 }
         }
     }
-            
-        
-    
 
 </script>
 
