@@ -25,9 +25,9 @@ const routes = [
     component: () => import('../views/PostsListView')
   },
   {
-  path: '/publications/:id',
-  name: 'OnePost',
-  component: () => import('../views/OnePostView')
+    path: '/publications/:id',
+    name: 'OnePost',
+    component: () => import('../views/OnePostView')
   }
 ]
 

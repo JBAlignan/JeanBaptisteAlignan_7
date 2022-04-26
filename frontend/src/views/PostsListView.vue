@@ -2,6 +2,13 @@
 
         <div class="row container">
             <h1>Bonjour {{  }}</h1>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Ecrivez ici" id="newPost" style="height: 100px"></textarea>
+                <label for="newPost"></label>
+            </div>
+
+            <!-- Bouton d'affichange des publications -->
+            <button type="submit" v-on:click="postsDisplay">Test d'affichage des publications</button>
 
             <div class="col-sm-6 g-4" id="card-post">
                 <div class="card">
@@ -18,27 +25,40 @@
 
 <script>
 
-// Gestion de la récupérations des données dans le store.
-// import { mapGetters } from 'vuex'
 
 // Gestion de l'affichage des publications de l'API.
-// import axios from 'axios'
+import axios from 'axios'
 export default {
     name: 'PostsListView',
     data(){
         return {
-            
+                 postcreated: '',
+                 posts: null,
         }
     },
-    computed: {
-        posts() {
-            return this.$store.state.posts
-        }
+    methods:{
+
+            postCreation(){
+                
+            },
+
+            postsDisplay(){
+                axios
+                .get("/posts", {
+                })
+                .then((response) => {
+                    console.log(response)
+                    
+                    this.posts = response.data
+                    return this.posts
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+            }
     },
-    mounted() {
-        this.$store.dispatch("getPosts")
-    }
 }
+
 
 </script>
 

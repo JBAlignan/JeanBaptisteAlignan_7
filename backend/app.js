@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require("cors");
 //Importation de path; donne accès à notre système de fichier.
 const path = require('path');
+// Importation de body-parser.
+const bodyParser = require("body-parser")
 //Importation des routes.
 const userRoutes = require('./src/routes/user');
 const postRoutes = require('./src/routes/post');
@@ -24,8 +26,9 @@ app.use((req, res, next) => {
 
   // Middleware global pour éviter erreur CORS
 app.use(cors());
-
+app.use(bodyParser.json())
 app.use(express.json());
+
 
 
 app.use('/images', express.static(path.join(__dirname, 'images')));

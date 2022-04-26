@@ -2,20 +2,19 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text" v-for='post in posts' :key='post.id'>{{ post.content }}</p>
+            <p class="card-text">{{  }}</p>
+            <button v-on:click="deletePost">Supprimer</button>
 
 
         <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" v-on:click="commentsDisplay">
                         Commentaires
                     </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo numquam incidunt ea id eligendi tenetur quae ipsum, nihil minima tempora iste quod impedit nobis, est voluptatibus hic ratione, dolores placeat.</div>
-                    <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo numquam incidunt ea id eligendi tenetur quae ipsum, nihil minima tempora iste quod impedit nobis, est voluptatibus hic ratione, dolores placeat.</div>
+                    <p class="accordion-body" v-for='comment in comments' :key='comment.id'>{{ comment.content }}</p>
                 </div>
             </div>
         </div>
@@ -24,27 +23,48 @@
     </div>
 </div>
 
-<!-- <CardComponent title="Titre de la Card"  /> -->
-
 </template>
 
 <script>
-// import CardComponent from '../components/CardComponent';
+
+import axios from 'axios'
 
     export default {
         name: 'OnePostView',
         data(){
             return {
+                comments: null,
             }
         },
-        computed: {
-            posts() {
-                return this.$store.state.posts
+        methods: {
+
+        // Affichage des commentaires.
+            commentsDisplay() {
+                axios
+                    .get('/comments', {
+                    })
+                    .then((response) => {
+                        console.log(response.data)
+                        this.comments= response.data
+                    })
+                    .catch((error) => {
+                    console.log(error)
+                    })
+                
+            },
+
+        // Suppression d'une publication.
+            deletePost() {
+                axios
+                    .delete('/posts/:id')
+                    .then((response) => {
+                        console.log(response)
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
             }
         },
-        mounted() {
-            this.$store.dispatch("getPosts")
-        }
     }
     
 </script>

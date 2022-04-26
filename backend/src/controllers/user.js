@@ -16,8 +16,10 @@ const jwt = require('jsonwebtoken')
 
     // Enregistrement d'un nouveau utilisateur.
         exports.signup = (req, res, next) => {
+            console.log(req.body)
+
             bcrypt.hash(req.body.password, 10)
-                .then(hash => {
+                .then((hash) => {
                     User.create({
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,
@@ -25,10 +27,10 @@ const jwt = require('jsonwebtoken')
                         password: hash,
                         admin: req.body.admin
                     })
-                        .then(user => res.status(201).json(user))
-                        .catch(error => res.status(401).json({ error: error }))
+                        .then((user) => res.status(201).json(user))
+                        .catch((error) => res.status(401).json({ error: error }))
                 })
-                .catch(error => res.status(500).json({ error }));
+                .catch((error) => res.status(500).json({ error }));
         };
 
 
@@ -42,7 +44,7 @@ const jwt = require('jsonwebtoken')
                     email: req.body.email 
             }
         })
-                .then(user => {
+                .then((user) => {
                     if (!user){ //Si l'email n'est pas trouvé.
                         return res.status(401).json({ error: 'Adresse email inconnue' });
                     }
