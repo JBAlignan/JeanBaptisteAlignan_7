@@ -40,8 +40,6 @@ export default {
         password: '',
     }
   },
-
-
   methods: {
     login(){
       axios
