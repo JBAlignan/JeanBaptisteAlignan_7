@@ -13,7 +13,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 // axios.defaults.withCredentials = false
 // Instruction créant l'URL par defaut pour toutes les requêtes.
 // Plus besoin de préciser l'URL pour le reste du code, seulement les endpoints.
-axios.defaults.baseURL = 'http://localhost:3000/api'
+axios.defaults.baseURL = 'http://localhost:3000/api';
+axios.defaults.headers.common['Authorization'] = `${process.env.TOKEN_KEY}`;
 
 Vue.config.productionTip = false
 

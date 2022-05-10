@@ -22,7 +22,7 @@ exports.signup = (req, res, next) => {
         lastName: req.body.lastName,
         email: req.body.email,
         password: hash,
-        admin: req.body.admin,
+        admin: false
       })
         .then((user) => res.status(201).json(user))
         .catch((error) => res.status(401).json({ error: error }))
@@ -55,6 +55,8 @@ exports.login = (req, res, next) => {
           res.status(200).json({
             //Si valide, retour de l'id de l'utilisateur et d'un token.
             userId: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
             token: jwt.sign(
               //Fonction sign encode un nouveau token.
               { userId: user.id }, //Token contient l'ID en tant que payload.

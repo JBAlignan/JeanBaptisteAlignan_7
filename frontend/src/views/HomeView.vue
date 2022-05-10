@@ -21,7 +21,7 @@
       </fieldset>
     </form>
 
-    <button type="button" class="btn btn-success" >Cr&#233;er un compte</button>
+    <router-link to="/signup" type="button" class="btn btn-success" >Cr&#233;er un compte</router-link>
 
   </main>
 </template>
@@ -46,13 +46,21 @@ export default {
         .post('users/login', {
           email: this.email,
           password: this.password,
-        })
+        }
+        // {
+        //   header: {
+        //   'Authorization': `Bearer ${token}`
+        // }}
+        )
         .then((response) => {
           if (!response.data.token) {
             this.errormessage = response.data.error;
           } else {
           localStorage.setItem('userToken', response.data.token)
+          localStorage.setItem('firstName', response.data.firstName)
+          localStorage.setItem('lastName', response.data.lastName)
           console.log(response)
+          console.log(response.data.token)
           router.push({ name: 'PostsList' })
           }
         })

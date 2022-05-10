@@ -1,13 +1,14 @@
 <template>
 
         <div class="row container">
-            <h1>Bonjour {{  }}</h1>
+            <h1>Bonjour {{ firstName }} {{ lastName }}</h1>
             <div class="form-floating">
-                <textarea class="form-control" placeholder="Ecrivez ici" id="newPost" style="height: 100px"></textarea>
+                <textarea class="form-control" placeholder="Ecrivez ici" id="newPost" style="height: 100px" v-model="postCreated"></textarea>
                 <label for="newPost"></label>
+            <button @click="postCreation" type="button" class="btn btn-primary">Publier</button>
             </div>
 
-            <!-- Bouton d'affichange des publications -->
+            <!-- Bouton d'affichage des publications -->
             <button type="submit" v-on:click="postsDisplay">Test d'affichage des publications</button>
 
             <div class="col-sm-6 g-4" id="card-post">
@@ -28,18 +29,39 @@
 
 // Gestion de l'affichage des publications de l'API.
 import axios from 'axios'
+
+
 export default {
     name: 'PostsListView',
     data(){
+
         return {
-                 postcreated: '',
-                 posts: null,
+            lastName: localStorage.getItem('lastName'),
+            firstName: localStorage.getItem('firstName'),
+            userToken: localStorage.getItem('userToken'),
+            postCreated: '',
+            posts: null,
         }
     },
     methods:{
 
             postCreation(){
                 
+                axios
+                .post("/posts", {
+                    postCreated: this.postCreated
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${userToken}`
+                    }
+                })
+                .then((response) => {
+                    console.log(response)
+
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
             },
 
             postsDisplay(){
