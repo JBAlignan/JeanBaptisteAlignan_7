@@ -46,13 +46,14 @@ export default {
     methods:{
 
             postCreation(){
+                console.log(this.$store.state.userToken)
                 
                 axios
                 .post("/posts", {
                     postCreated: this.postCreated
-                }, {
-                    headers: {
-                        'Authorization': `Bearer ${userToken}`
+                }, { 
+                    headers : {
+                    'Authorization' : `Bearer ${this.$store.state.userToken}`
                     }
                 })
                 .then((response) => {

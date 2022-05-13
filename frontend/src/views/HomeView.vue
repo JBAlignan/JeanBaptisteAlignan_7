@@ -46,17 +46,12 @@ export default {
         .post('users/login', {
           email: this.email,
           password: this.password,
-        }
-        // {
-        //   header: {
-        //   'Authorization': `Bearer ${token}`
-        // }}
-        )
+        })
         .then((response) => {
           if (!response.data.token) {
             this.errormessage = response.data.error;
           } else {
-          localStorage.setItem('userToken', response.data.token)
+          this.$store.commit('USER_TOKEN', response.data.token)
           localStorage.setItem('firstName', response.data.firstName)
           localStorage.setItem('lastName', response.data.lastName)
           console.log(response)
