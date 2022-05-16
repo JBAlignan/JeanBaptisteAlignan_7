@@ -2,7 +2,7 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
-            <p class="card-text">{{  }}</p>
+            <p class="card-text">{{ $route.params.content }}</p>
             <button v-on:click="deletePost">Supprimer</button>
 
 
@@ -41,7 +41,7 @@ import axios from 'axios'
         // Affichage des commentaires.
             commentsDisplay() {
                 axios
-                    .get('/comments', {
+                    .get('/posts/:id', {
                     })
                     .then((response) => {
                         console.log(response.data)
@@ -56,7 +56,11 @@ import axios from 'axios'
         // Suppression d'une publication.
             deletePost() {
                 axios
-                    .delete('/posts/:id')
+                    .delete('/posts/:id', {
+                        headers: {
+                        'Authorization' : `Bearer ${this.$store.state.userToken}`
+                        }
+                    })
                     .then((response) => {
                         console.log(response)
                     })

@@ -18,9 +18,10 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Post.init({
+    // postCreated: DataTypes.TEXT,
     userId: {
      type: DataTypes.INTEGER,
-     allowNull: false
+    //  allowNull: false
     },
     content: DataTypes.TEXT,
     imageUrl: DataTypes.TEXT,

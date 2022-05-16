@@ -1,9 +1,9 @@
 <template>
 
         <div class="row container">
-            <h1>Bonjour {{ firstName }} {{ lastName }}</h1>
+            <h1>Bonjour {{ $store.state.firstName }} {{ $store.state.lastName }}</h1>
             <div class="form-floating">
-                <textarea class="form-control" placeholder="Ecrivez ici" id="newPost" style="height: 100px" v-model="postCreated"></textarea>
+                <textarea class="form-control" placeholder="Ecrivez ici" id="newPost" style="height: 100px" v-model="content"></textarea>
                 <label for="newPost"></label>
             <button @click="postCreation" type="button" class="btn btn-primary">Publier</button>
             </div>
@@ -29,42 +29,41 @@
 
 // Gestion de l'affichage des publications de l'API.
 import axios from 'axios'
-
+import router from '../router/index'
 
 export default {
     name: 'PostsListView',
     data(){
 
         return {
-            lastName: localStorage.getItem('lastName'),
-            firstName: localStorage.getItem('firstName'),
-            userToken: localStorage.getItem('userToken'),
-            postCreated: '',
+            content: '',
+            userId: '',
             posts: null,
         }
     },
     methods:{
-
+// Création d'une publication.
             postCreation(){
-                console.log(this.$store.state.userToken)
-                
                 axios
                 .post("/posts", {
-                    postCreated: this.postCreated
+                    content: this.content,
+                    // Permet l'envoi de la valeur de userId à la BDD.
+                    userId: this.$store.state.userId,
                 }, { 
                     headers : {
                     'Authorization' : `Bearer ${this.$store.state.userToken}`
-                    }
+                    },
                 })
                 .then((response) => {
+                    router.
                     console.log(response)
-
                 })
                 .catch((error) => {
                     console.log(error)
                 })
             },
 
+// Affichage des publications de la BDD.
             postsDisplay(){
                 axios
                 .get("/posts", {
@@ -78,7 +77,8 @@ export default {
                 .catch((error) => {
                     console.log(error)
                 })
-            }
+            },
+
     },
 }
 
