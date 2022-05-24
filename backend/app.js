@@ -36,6 +36,6 @@ app.use("/api/users", userRoutes)
 //Enregistrement des routes publications.
 app.use("/api/posts", postRoutes)
 //Enregistrement des routes de commentaires.
-app.use("/api/comments", commentRoutes)
+app.use("/api/", commentRoutes)
 
 module.exports = app

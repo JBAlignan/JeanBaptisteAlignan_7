@@ -2,9 +2,15 @@
 
         <div class="row container">
             <h1>Bonjour {{ $store.state.firstName }} {{ $store.state.lastName }}</h1>
+            <!-- Création d'une publication -->
             <div class="form-floating">
                 <textarea class="form-control" placeholder="Ecrivez ici" id="newPost" style="height: 100px" v-model="content"></textarea>
                 <label for="newPost"></label>
+                <!-- Upload d'image -->
+                <div class="input-group">
+                    <input type="file" class="form-control" id="postImg" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    <button class="btn btn-outline-secondary" type="button" id="postImg">Button</button>
+                </div>
             <button @click="postCreation" type="button" class="btn btn-primary">Publier</button>
             </div>
 
@@ -29,7 +35,7 @@
 
 // Gestion de l'affichage des publications de l'API.
 import axios from 'axios'
-import router from '../router/index'
+
 
 export default {
     name: 'PostsListView',
@@ -42,7 +48,7 @@ export default {
         }
     },
     methods:{
-// Création d'une publication.
+            // Création d'une publication.
             postCreation(){
                 axios
                 .post("/posts", {
@@ -55,7 +61,6 @@ export default {
                     },
                 })
                 .then((response) => {
-                    router.
                     console.log(response)
                 })
                 .catch((error) => {
@@ -63,7 +68,7 @@ export default {
                 })
             },
 
-// Affichage des publications de la BDD.
+            // Affichage des publications de la BDD.
             postsDisplay(){
                 axios
                 .get("/posts", {
