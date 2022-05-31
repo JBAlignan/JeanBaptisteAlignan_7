@@ -2,14 +2,16 @@
 
         <div class="row container">
             <h1>Bonjour {{ $store.state.firstName }} {{ $store.state.lastName }}</h1>
+
             <!-- Création d'une publication -->
             <div class="form-floating">
                 <textarea class="form-control" placeholder="Ecrivez ici" id="newPost" style="height: 100px" v-model="content"></textarea>
                 <label for="newPost"></label>
+
                 <!-- Upload d'image -->
                 <div class="input-group">
-                    <input type="file" class="form-control" id="postImg" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                    <button class="btn btn-outline-secondary" type="button" id="postImg">Button</button>
+                    <input type="file" @change="onFileSelected" class="form-control" id="postImg" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    <button @click="onUpload" class="btn btn-outline-secondary" type="button" id="postImg">Ajouter</button>
                 </div>
             <button @click="postCreation" type="button" class="btn btn-primary">Publier</button>
             </div>
@@ -45,15 +47,35 @@ export default {
             content: '',
             userId: '',
             posts: null,
+            imageUrl: null,
         }
     },
     methods:{
+
+            // Ajout d'un fichier.
+            onFileSelected(event) {
+                this.imageUrl = event.target.files[0]
+            },
+            //Upload d'un fichier.
+            onUpload() {
+                const fd = new FormData();
+                fd.append('image', this.imageUrl, this.imageUrl.name)
+                axios.post('/posts', fd, {
+                    headers : {
+                    'Authorization' : `Bearer ${this.$store.state.userToken}`
+                    },
+                })
+                    .then (response => {
+                        console.log(response)
+                    })
+            },
             // Création d'une publication.
             postCreation(){
                 axios
                 .post("/posts", {
                     content: this.content,
                     // Permet l'envoi de la valeur de userId à la BDD.
+                    // GESTION DE L'UPLOAD ICI DUCON !!!!!
                     userId: this.$store.state.userId,
                 }, { 
                     headers : {
@@ -75,7 +97,6 @@ export default {
                 })
                 .then((response) => {
                     console.log(response)
-                    
                     this.posts = response.data
                     return this.posts
                 })

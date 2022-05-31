@@ -11,17 +11,15 @@ const {db, Post, Comments} = require('../models/index');
 
     //--Création d'un commentaire.
     exports.createComment = (req, res, next) => {       
-        Post.findOne({ where: { id: req.params.id } })
+        Post.findOne({ where: { id: req.body.postId } })
         .then(() => 
             Comments.create({
                 postId: req.body.id,
-                content: req.body.content,
+                content: req.body.comment,
                 userId: req.body.userId
             }))
         .then(comment => res.status(201).json(comment))
-        // .catch(error => (res.status(401).json({ error: error })))
-    
-        .catch(error) (res.status(401).json({ error: "Erreur à la publication" }))
+        .catch(error => (res.status(401).json({ error: error })))
     }
 
     //--READ

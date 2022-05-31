@@ -8,7 +8,9 @@ export default new Vuex.Store({
     firstName: '',
     lastName: '',
     userId: '',
-    userToken: ''
+    userToken: '',
+    post: '',
+    comment: [],
   },
   getters: {
     
@@ -25,7 +27,13 @@ export default new Vuex.Store({
     },
     USER_TOKEN(state, payload){
       state.userToken = payload
-    }
+    },
+    // POST_BY_ID(state, payload){
+    //   state.post = payload
+    // },
+    // COMMENT_BY_ID(state, payload){
+    //   state.comment = payload
+    // }
   },
   actions: {
   },
