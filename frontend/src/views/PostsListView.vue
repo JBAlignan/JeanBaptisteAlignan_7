@@ -1,6 +1,10 @@
 <template>
 
         <div class="row container">
+                    <router-link :to="{ name: 'Profil', params: { id: this.$store.state.userId } }"  type="button" class="btn btn-success" >Profil</router-link>
+
+
+
             <h1>Bonjour {{ $store.state.firstName }} {{ $store.state.lastName }}</h1>
 
             <!-- Création d'une publication -->
