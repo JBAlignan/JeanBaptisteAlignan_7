@@ -89,15 +89,15 @@ exports.findAllUsers = (req, res, next) => {
 // Mise à jour d'un compte utilisateur.
 exports.updateUser = (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
-  bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => {
+  // bcrypt
+  //   .hash(req.body.password, 10)
+    .then(() => {
       User.update(
         {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
-          password: hash,
+          // password: hash,
         },
         {
           where: {

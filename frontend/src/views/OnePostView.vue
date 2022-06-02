@@ -17,6 +17,7 @@
                     <!--Création de commentaire--> 
                     <label for="postComment" class="form-label">Laisser un commentaire</label>
                     <input type="text" name="postComment" class="form-control" id="postComment" v-model="comment">
+                    <!-- Bouton de publication d'un commentaire -->
                     <button  @click="commentCreation" type="button" class="btn btn-primary">Commenter</button>
                     <!--Liste des commentaires--> 
                     <button @click="commentsDisplay" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -24,7 +25,7 @@
                     </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                    <p class="accordion-body" v-for='comment in comments' :key='comment.id'>{{ comment.content }}</p>
+                    <p class="accordion-body" v-for='comment in commentsFiltered' :key='comment.content'>{{ comment.content }}</p>
                 </div>
             </div>
         </div>
@@ -47,7 +48,8 @@ import axios from 'axios'
                 postId: '',
                 content: '',
                 comment: '',
-                comments: []
+                comments: [],
+                commentFiltered: []
             }
         },
 
@@ -101,10 +103,11 @@ import axios from 'axios'
 
         // Publication d'un commentaire.
             commentCreation(){
+
                 axios
                     .post('/comments', {
                         userId: this.$store.state.userId,
-                        postId: this.$store.state.postId,
+                        postId: `${this.$route.params.id}`,
                         comment: this.comment,
                         }, {
                         headers: {
@@ -113,7 +116,6 @@ import axios from 'axios'
                     })
                     .then((response) => {
                         console.log(response)
-                        // console.log(postId)
                     })
                     .catch((error) => {
                         console.log(error)
@@ -126,12 +128,23 @@ import axios from 'axios'
                     .get('comments', {
                     })
                     .then((response) => {
-                        // this.$store.commit('POST_BY_ID', `${this.$route.params.id}`)
-                        // this.$store.commit('COMMENT_BY_ID', response.data.content)
-                        this.comments = response.data
-                        // this.comments.forEach(element => element.content)
 
-                        return this.comment
+                        this.comments = response.data
+                        
+                        // Bouble foreach pour filtrer les commentaires.
+                        let commentsFiltered = []
+                        this.comments.forEach(element => {
+                            if (element.postId == `${this.$route.params.id}`){
+                                commentsFiltered.push(element)
+                            }
+                        });
+                        
+                            
+                        console.log(this.comments)
+                        console.log(commentsFiltered)
+                        
+
+                        return this.comments
                     })
                     .catch((error) => {
                         console.log(error)

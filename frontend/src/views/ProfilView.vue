@@ -50,8 +50,8 @@
             axios
               .put(`/users/${this.$route.params.id}`, {
                 firstName: this.firstName,
-                lastName: this.lastName,
-                avatar: this.avatar
+                // lastName: this.lastName,
+                // avatar: this.avatar
               }, {
                   headers: {
                   'Authorization' : `Bearer ${this.$store.state.userToken}`

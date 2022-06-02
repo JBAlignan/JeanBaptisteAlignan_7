@@ -14,9 +14,9 @@ const {db, Post, Comments} = require('../models/index');
         Post.findOne({ where: { id: req.body.postId } })
         .then(() => 
             Comments.create({
-                postId: req.body.id,
+                userId: req.body.userId,
+                postId: req.body.postId,
                 content: req.body.comment,
-                userId: req.body.userId
             }))
         .then(comment => res.status(201).json(comment))
         .catch(error => (res.status(401).json({ error: error })))

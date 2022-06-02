@@ -15,8 +15,11 @@
                 <!-- Upload d'image -->
                 <div class="input-group">
                     <input type="file" @change="onFileSelected" class="form-control" id="postImg" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    <!-- Bouton d'ajout de l'image -->
                     <button @click="onUpload" class="btn btn-outline-secondary" type="button" id="postImg">Ajouter</button>
                 </div>
+
+             <!-- Bouton de publication -->   
             <button @click="postCreation" type="button" class="btn btn-primary">Publier</button>
             </div>
 
@@ -60,10 +63,11 @@ export default {
             onFileSelected(event) {
                 this.imageUrl = event.target.files[0]
             },
-            //Upload d'un fichier.
+            // Upload d'un fichier.
             onUpload() {
                 const fd = new FormData();
                 fd.append('image', this.imageUrl, this.imageUrl.name)
+
                 axios.post('/posts', fd, {
                     headers : {
                     'Authorization' : `Bearer ${this.$store.state.userToken}`
@@ -79,12 +83,13 @@ export default {
                 .post("/posts", {
                     content: this.content,
                     // Permet l'envoi de la valeur de userId à la BDD.
-                    // GESTION DE L'UPLOAD ICI DUCON !!!!!
                     userId: this.$store.state.userId,
+                    imageUrl: this.imageUrl,
                 }, { 
                     headers : {
                     'Authorization' : `Bearer ${this.$store.state.userToken}`
                     },
+                    
                 })
                 .then((response) => {
                     console.log(response)
@@ -100,7 +105,7 @@ export default {
                 .get("/posts", {
                 })
                 .then((response) => {
-                    console.log(response)
+                    console.log(response.data)
                     this.posts = response.data
                     return this.posts
                 })
