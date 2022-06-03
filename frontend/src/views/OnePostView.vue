@@ -25,7 +25,7 @@
                     </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                    <p class="accordion-body" v-for='comment in commentsFiltered' :key='comment.content'>{{ comment.content }}</p>
+                    <p class="accordion-body" v-for='comment in comments' :key='comment.content'>{{ comment.content }}</p>
                 </div>
             </div>
         </div>
@@ -49,7 +49,6 @@ import axios from 'axios'
                 content: '',
                 comment: '',
                 comments: [],
-                commentFiltered: []
             }
         },
 
@@ -103,7 +102,6 @@ import axios from 'axios'
 
         // Publication d'un commentaire.
             commentCreation(){
-
                 axios
                     .post('/comments', {
                         userId: this.$store.state.userId,
@@ -130,21 +128,14 @@ import axios from 'axios'
                     .then((response) => {
 
                         this.comments = response.data
-                        
-                        // Bouble foreach pour filtrer les commentaires.
-                        let commentsFiltered = []
-                        this.comments.forEach(element => {
-                            if (element.postId == `${this.$route.params.id}`){
-                                commentsFiltered.push(element)
-                            }
-                        });
-                        
-                            
+                        let postId = `${this.$route.params.id}`
+                        console.log(postId)
                         console.log(this.comments)
-                        console.log(commentsFiltered)
-                        
+          
+                        const result = this.comments.filter(comment => postId == comment.postId)
+                        console.log(result)
 
-                        return this.comments
+                    
                     })
                     .catch((error) => {
                         console.log(error)
