@@ -78,6 +78,7 @@ import axios from 'axios'
                     })
                     .then((response) => {
                         console.log(response)
+                        this.$router.back()
                     })
                     .catch((error) => {
                         console.log(error)
@@ -94,6 +95,7 @@ import axios from 'axios'
                     })
                     .then((response) => {
                         console.log(response)
+                        this.$router.back()
                     })
                     .catch((error) => {
                         console.log(error)
@@ -123,17 +125,16 @@ import axios from 'axios'
         // Affichage des commentaires.
             commentsDisplay(){
                 axios
-                    .get('comments', {
+                    .get(`comments/${this.$route.params.id}`, {
                     })
                     .then((response) => {
 
                         this.comments = response.data
-                        let postId = `${this.$route.params.id}`
-                        console.log(postId)
+
                         console.log(this.comments)
           
-                        const result = this.comments.filter(comment => postId == comment.postId)
-                        console.log(result)
+                        // const result = this.comments.filter(comment => postId == comment.postId)
+                        // console.log(result)
 
                     
                     })

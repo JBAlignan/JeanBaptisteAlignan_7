@@ -18,7 +18,8 @@ const auth = require('../middleware/auth')
                 
                 userId: req.body.userId,
                 content: req.body.content,
-                // imageUrl: req.file.filename
+                imageUrl: req.file.filename
+                // imageUrl: req.body.imageUrl
             
         })
         .then(post => res.status(201).json(post))

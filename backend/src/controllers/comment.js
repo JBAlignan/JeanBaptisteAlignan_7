@@ -27,10 +27,10 @@ const {db, Post, Comments} = require('../models/index');
     //--Trouver toutes les publications.
     exports.findAllComments = (req, res, next) => {
         Comments.findAll(
-            // {
-            //     where: { postId: Post.id },
-            //     include: [{ all: true, nested: true }]
-            // }
+            {
+                where: { postId: req.params.postId },
+                include: [{ all: true, nested: true }]
+            }
         )
         .then(comments => res.status(200).json(comments))
         .catch(error => res.status(400).json({ error }));

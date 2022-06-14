@@ -9,7 +9,7 @@ const { route } = require('./user');
 
 // Routes pour l'envoi du schéma rempli au serveur.
 router.post('/', commentCtrl.createComment);
-router.get('/', commentCtrl.findAllComments);
+router.get('/:postId', commentCtrl.findAllComments);
 router.get('/:id', commentCtrl.findOneComment);
 router.put('/:id', commentCtrl.updateComment);
 router.delete('/:id', commentCtrl.deleteComment);

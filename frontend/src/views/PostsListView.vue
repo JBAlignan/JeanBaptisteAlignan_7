@@ -20,17 +20,16 @@
                 </div>
 
              <!-- Bouton de publication -->   
-            <button @click="postCreation" type="button" class="btn btn-primary">Publier</button>
+            <button @click="postCreation; onUpload" type="button" class="btn btn-primary">Publier</button>
             </div>
-
-            <!-- Bouton d'affichage des publications -->
-            <button type="submit" v-on:click="postsDisplay">Test d'affichage des publications</button>
 
             <div class="col-sm-6 g-4" id="card-post">
                 <div class="card">
                     <div class="card-body" v-for='post in posts' :key='post.id'>
                         <!-- <h5 class="card-title">Titre Poste 1</h5> -->
                         <p class="card-text">{{ post.content }}</p>
+                        <!-- Affichage de l'image -->
+                        <img  v-bind:src=" post.imageUrl " />
                         <router-link :to="{ name:'OnePost', params: { id: post.id } }" class="btn btn-primary">Consulter</router-link>
                     </div>
                 </div>
@@ -76,17 +75,25 @@ export default {
                     .then (response => {
                         console.log(response)
                     })
+                    .catch((error) => {
+                        console.log(error)
+                })
             },
             // Création d'une publication.
             postCreation(){
+
+
+
                 axios
                 .post("/posts", {
+
                     content: this.content,
                     // Permet l'envoi de la valeur de userId à la BDD.
                     userId: this.$store.state.userId,
                     imageUrl: this.imageUrl,
                 }, { 
                     headers : {
+                    // 'Content-Type': 'multipart/form-data',   
                     'Authorization' : `Bearer ${this.$store.state.userToken}`
                     },
                     
@@ -99,22 +106,22 @@ export default {
                 })
             },
 
+    },
+    mounted() {
             // Affichage des publications de la BDD.
-            postsDisplay(){
                 axios
                 .get("/posts", {
                 })
                 .then((response) => {
                     console.log(response.data)
                     this.posts = response.data
+                    // console.log(this.posts[2].imageUrl)
                     return this.posts
                 })
                 .catch((error) => {
                     console.log(error)
                 })
-            },
-
-    },
+    }
 }
 
 
