@@ -10,6 +10,7 @@ const bodyParser = require("body-parser")
 const userRoutes = require("./src/routes/user")
 const postRoutes = require("./src/routes/post")
 const commentRoutes = require("./src/routes/comment")
+const likeRoutes = require("./src/routes/like")
 // Variables d'environnement pour éviter l'accès à des données sensibles.
 require("dotenv").config()
 
@@ -37,5 +38,7 @@ app.use("/api/users", userRoutes)
 app.use("/api/posts", postRoutes)
 //Enregistrement des routes de commentaires.
 app.use("/api/comments", commentRoutes)
+//Enregistrement des routes des likes.
+app.use("api/posts/:id", likeRoutes)
 
 module.exports = app

@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       Post.belongsTo(models.User, { foreignKey: 'userId' });
       //Association Post/Commentaire, foreignKey (postId) dans la table comments.
       Post.hasMany(models.Comments, { foreignKey: 'postId' })
+      //Association Post/User via tables de liaison Likes/Dislikes.
+      Post.belongsToMany(models.User, { through: 'likes' });
+      Post.belongsToMany(models.User, { through: 'dislikes' });
     }
   };
 
@@ -21,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     // postCreated: DataTypes.TEXT,
     userId: {
      type: DataTypes.INTEGER,
-    //  allowNull: false
+     allowNull: false
     },
     content: DataTypes.TEXT,
     imageUrl: DataTypes.TEXT,

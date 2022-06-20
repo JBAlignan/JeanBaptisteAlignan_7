@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       //Association User/Post, ForeignKey (userId) dans la table Post (target).
       User.hasMany(models.Post, { foreignKey: 'userId' });
       //Association User/Post via tables de liaison Likes/Dislikes.
-      // User.belongsToMany(models.Post, { through: 'likes' });
-      // User.belongsToMany(models.Post, { through: 'dislikes' });
+      User.belongsToMany(models.Post, { through: 'likes' });
+      User.belongsToMany(models.Post, { through: 'dislikes' });
     }
   };
 

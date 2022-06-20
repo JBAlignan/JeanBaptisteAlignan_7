@@ -5,7 +5,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 //Importation de la gestion de création de nom de fichier dans la constante multer.
 const multer = require('../middleware/multer-config');
-// Importation des fonctions de users.js du dossier controllers.
+// Importation des fonctions de post.js du dossier controllers.
 const postCtrl = require('../controllers/post');
 
 

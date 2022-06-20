@@ -6,6 +6,8 @@
             <div class="form-floating">
                 <textarea class="form-control" placeholder="Ecrivez ici" id="updatePost" style="height: 100px" v-model="content"></textarea>
                 <label for="updatePost"></label>
+                <button @click="toLike" type="button" class="btn btn-info">J'aime</button>
+                <p>{{ likesCount }}</p>
                 <button @click="updatePost" type="button" class="btn btn-primary">Modifier</button>
             </div>
             <button v-on:click="deletePost">Supprimer</button>
@@ -49,6 +51,7 @@ import axios from 'axios'
                 content: '',
                 comment: '',
                 comments: [],
+                likesCount: 0
             }
         },
 
@@ -102,12 +105,28 @@ import axios from 'axios'
                     })
             },
 
+        // Ajout d'un like.
+            toLike(){
+                axios
+                    .post(`/posts/${this.$route.params.id}`, {
+                        userId: this.$store.state.userId,
+                        postId: `${this.$route.params.id}`,
+                        likesCount: this.likesCount += 1
+                    }) 
+                    .then((response) => {
+                        console.log(response)
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+            },
+
         // Publication d'un commentaire.
             commentCreation(){
                 axios
                     .post('/comments', {
                         userId: this.$store.state.userId,
-                        postId: `${this.$route.params.id}`,
+                        postId: this.postId,
                         comment: this.comment,
                         }, {
                         headers: {
