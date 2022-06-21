@@ -2,8 +2,6 @@
 
     <div id="body" class="d-inline-flex p-2 justify-content-center">
         <div class="row container">
-                    <router-link :to="{ name: 'Profil', params: { id: this.$store.state.userId } }"  type="button" class="btn btn-success" >Profil</router-link>
-
             <h1>Bonjour {{ $store.state.firstName }} {{ $store.state.lastName }}</h1>
 
     <!-- Formulaire de création d'une publication -->
@@ -20,10 +18,9 @@
             <button @click="postCreation" type="button" class="btn btn-primary">Publier</button>
             </div>
 
-
     <!-- Liste des publications -->
                 <div class="row">
-                    <div class="col-lg-6 gy-5"  v-for='post in posts' :key='post.id'>
+                    <div class="col-lg-6 gy-5 d-flex justify-content-center"  v-for='post in posts' :key='post.id'>
                         <div class="card" >
                             <div class="card-body ">
                                 <h5 class="card-title">Special title treatment</h5>
@@ -34,24 +31,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-            <!-- <div class=" g-4 d-flex" id="card-post">
-                <div class="card row gx-5 d-flex flex-row justify-content-start">
-                    <div class="card-body col-md-5 gy-2 mx-2" v-for='post in posts' :key='post.id'> -->
-                        <!-- <h5 class="card-title">Titre Poste 1</h5> -->
-                        <!-- <p class="card-text">{{ post.content }}</p> -->
-                        <!-- Affichage de l'image -->
-                        <!-- <img class="img-fluid" v-if="post.imageUrl" v-bind:src="`http://localhost:3000/images/${post.imageUrl}`"/>
-                        <router-link :to="{ name:'OnePost', params: { id: post.id } }" class="btn btn-primary">Consulter</router-link>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
     
@@ -132,9 +111,7 @@ export default {
 
 <style lang="scss">
 
-#CardPublication{
-    justify-content: space-between;
-}
+
 
     .card-body{
         border: 2px solid purple;

@@ -1,13 +1,18 @@
 <template>
-    <div class="card" style="width: 18rem;">
+
+    <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
             <p class="card-text">{{ content }}</p>
             <div class="form-floating">
                 <textarea class="form-control" placeholder="Ecrivez ici" id="updatePost" style="height: 100px" v-model="content"></textarea>
                 <label for="updatePost"></label>
-                <button @click="toLike" type="button" class="btn btn-info">J'aime</button>
-                <p>{{ likesCount }}</p>
+                <!-- Bouton Like -->
+                <button @click="toLike" type="button" class="btn btn-info" >Like</button>
+                <span style="border: 1px solid blue">{{ likesCount }}</span>
+                <!-- Bouton Dislike -->
+                <button  type="button" class="btn btn-warning" >Dislike</button>
+                <span style="border: 1px solid red">{{ dislikesCount }}</span>
+
                 <button @click="updatePost" type="button" class="btn btn-primary">Modifier</button>
             </div>
             <button v-on:click="deletePost">Supprimer</button>
@@ -51,7 +56,8 @@ import axios from 'axios'
                 content: '',
                 comment: '',
                 comments: [],
-                likesCount: 0
+                likesCount: 0,
+                dislikesCount: 0
             }
         },
 
@@ -121,6 +127,22 @@ import axios from 'axios'
                     })
             },
 
+        // Ajout d'un dislike
+            toDislike(){
+                axios
+                    .post(`/posts/${this.$route.params.id}`, {
+                        userId: this.$store.state.userId,
+                        postId: `${this.$route.params.id}`,
+                        dislikesCount: this.dislikesCount +=1
+                    })
+                    .then((response) => {
+                        console.log(response)
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+            },
+
         // Publication d'un commentaire.
             commentCreation(){
                 axios
@@ -168,5 +190,10 @@ import axios from 'axios'
 
 
 <style lang="scss">
+
+div.card{
+    align-self: center;
+    width: 20em;
+}
 
 </style>
