@@ -2,7 +2,7 @@
 
     <div id="body" class="d-inline-flex p-2 justify-content-center">
         <div class="row container justify-content-center">
-            <h1 class="col-md-9">Bonjour {{ $store.state.firstName }} {{ $store.state.lastName }}</h1>
+            <h2 class="col-md-9">Bonjour {{ $store.state.firstName }} {{ $store.state.lastName }}</h2>
 
     <!-- Formulaire de création d'une publication -->
             <div class="form-floating col-md-9">
@@ -11,7 +11,7 @@
 
                 <!-- Upload d'image -->
                 <div class="input-group mt-2">
-                    <input type="file" @change="onFileSelected" class="form-control" id="postImg" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    <input type="file" @change="onFileSelected" class="form-control" id="postImg" aria-label="Upload">
                 </div>
 
              <!-- Bouton de publication -->   
@@ -112,7 +112,7 @@ export default {
 
 <style lang="scss">
 
-    h1{
+    h2{
         font-size: 1.5em;
         text-align: start;
     }

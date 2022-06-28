@@ -4,11 +4,11 @@
             <div class="row justify-content-end">
                 <div class="col-lg-4">
                     
-                    <a href="http://localhost:8080/#/publications" id="logo" alt="Groupomania"><img src="../assets/groupomaniaLogoSm.png" class ="img-fluid" alt="Groupomania" />
-                    </a>
+                    <h1><a href="http://localhost:8080/#/publications" id="logo" alt="Accueil Groupomania"><img src="../assets/groupomaniaLogoSm.png" class ="img-fluid" alt="Groupomania" />
+                    </a></h1>
                 </div>
                 <div class="col-lg-4 d-lg-flex align-items-end flex-column align-self-center">
-                    <button type="button" class="btn btn-light" v-on:click="logout" >Déconnexion</button>
+                    <button type="button" class="btn btn-light" v-on:click="logout">Déconnexion</button>
                 </div>
             </div>
         </div>

@@ -2,7 +2,6 @@
 import HeaderView from "./views/HeaderView.vue";
 import FooterView from './views/FooterView.vue';
 
-
 export default {
  name: 'App',
  components: {
@@ -11,6 +10,7 @@ export default {
  }
 }
 </script>
+
 
 
 <template>
@@ -24,6 +24,8 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+
 
 body {
   height: 100vh;

@@ -12,7 +12,7 @@
                         <button @click="toLike" type="button" class="btn btn-info"><span class="badge text-bg-secondary">{{ likesCount }}</span>Like</button>
 
                         <!-- Bouton Dislike -->
-                        <button @click="toDislike" type="button" class="btn btn-warning"><span class="badge text-bg-secondary">{{ dislikesCount }}</span>Dislike</button>
+                        <button @click="toDislike" type="button" class="btn btn-warning"><span class="badge">{{ dislikesCount }}</span>Dislike</button>
                     </div>
 
             </div>
@@ -20,7 +20,7 @@
             <!-- Boutons de suppression et de modification-->
             <div class="d-flex justify-content-around">
                 <button @click="updatePost" type="button" class="btn btn-primary">Modifier</button>
-                <button v-on:click="deletePost" type="button" class="btn btn-danger">Supprimer</button>
+                <button @click="deletePost" type="button" class="btn btn-danger">Supprimer</button>
             </div>
 
 
@@ -72,6 +72,7 @@ import axios from 'axios'
                     .get(`/posts/${this.$route.params.id}`, {
                     })
                     .then((response) => {
+                        console.log(response.data)
                         this.content = response.data.post.content
                     })
                     .catch((error) => {
@@ -211,6 +212,10 @@ div.card{
 #likeButton{
     bottom: 1em;
     left: 3.5em
+}
+
+.badge{
+    color: black;
 }
 
 #flush-headingOne{
