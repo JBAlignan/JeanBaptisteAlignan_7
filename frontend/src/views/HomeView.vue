@@ -21,7 +21,7 @@
       </fieldset>
     </form>
 
-    <router-link to="/signup" type="button" class="btn btn-success" >Cr&#233;er un compte</router-link>
+    <router-link to="/signup" type="button" class="btn btn-success mt-5">Cr&#233;er un compte</router-link>
 
   </main>
 </template>
@@ -69,12 +69,24 @@ export default {
 </script>
 
 <style lang="scss">
+
+main{
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
 fieldset{
-  background-color: rgb(245, 238, 238);
+  background-color: #FFD7D7;
   padding: 1em;
   & div input{
     padding-left: 1em;
   }
+}
+
+.btn-success{
+  height: 6%;
+  width: 10em;
 }
 
 </style>

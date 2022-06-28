@@ -1,32 +1,33 @@
 <template>
 
     <div id="body" class="d-inline-flex p-2 justify-content-center">
-        <div class="row container">
-            <h1>Bonjour {{ $store.state.firstName }} {{ $store.state.lastName }}</h1>
+        <div class="row container justify-content-center">
+            <h1 class="col-md-9">Bonjour {{ $store.state.firstName }} {{ $store.state.lastName }}</h1>
 
     <!-- Formulaire de création d'une publication -->
-            <div class="form-floating">
+            <div class="form-floating col-md-9">
                 <textarea class="form-control" placeholder="Ecrivez ici" id="newPost" style="height: 100px" v-model="content"></textarea>
                 <label for="newPost"></label>
 
                 <!-- Upload d'image -->
-                <div class="input-group">
+                <div class="input-group mt-2">
                     <input type="file" @change="onFileSelected" class="form-control" id="postImg" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                 </div>
 
              <!-- Bouton de publication -->   
-            <button @click="postCreation" type="button" class="btn btn-primary">Publier</button>
+            <button @click="postCreation" type="button" class="btn btn-primary mt-4">Publier</button>
             </div>
 
     <!-- Liste des publications -->
                 <div class="row">
                     <div class="col-lg-6 gy-5 d-flex justify-content-center"  v-for='post in posts' :key='post.id'>
-                        <div class="card" >
-                            <div class="card-body ">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">{{ post.content }}</p>
-                                <img class="img-fluid" v-if="post.imageUrl" v-bind:src="`http://localhost:3000/images/${post.imageUrl}`"/>
-                                <router-link :to="{ name:'OnePost', params: { id: post.id } }" class="btn btn-primary">Consulter</router-link>
+                        <div class="card col-12" >
+                            <div class="card-body">
+                                <p class="card-text align-self-start px-2" style="border: 1px solid black">{{ post.content }}</p>
+                                    <div class="text-center">
+                                        <img class="img-fluid col-sm-8 col-md-10 mb-4" v-if="post.imageUrl" v-bind:src="`http://localhost:3000/images/${post.imageUrl}`"/>
+                                    </div>
+                                <router-link :to="{ name:'OnePost', params: { id: post.id } }" class="btn bg-dark text-white mt-auto align-self-center">Consulter</router-link>
                             </div>
                         </div>
                     </div>
@@ -97,7 +98,7 @@ export default {
                 .then((response) => {
                     console.log(response.data)
                     this.posts = response.data
-                    // console.log(this.posts[2].imageUrl)
+
                     return this.posts
                 })
                 .catch((error) => {
@@ -111,10 +112,15 @@ export default {
 
 <style lang="scss">
 
-
+    h1{
+        font-size: 1.5em;
+        text-align: start;
+    }
 
     .card-body{
-        border: 2px solid purple;
+        display: flex;
+        flex-direction: column;
+        background-color: #FFD7D7;
     }
 
 </style>

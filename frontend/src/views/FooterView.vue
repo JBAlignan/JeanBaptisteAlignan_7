@@ -15,7 +15,7 @@ export default {
 <style lang="scss">
 
 footer{
-    background-color: #122442;
+    background-color: #4E5166;
  & figure {
     width: 100%;
     display: flex;

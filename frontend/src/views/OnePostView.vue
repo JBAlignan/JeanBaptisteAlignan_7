@@ -6,28 +6,34 @@
             <div class="form-floating">
                 <textarea class="form-control" placeholder="Ecrivez ici" id="updatePost" style="height: 100px" v-model="content"></textarea>
                 <label for="updatePost"></label>
-                <!-- Bouton Like -->
-                <button @click="toLike" type="button" class="btn btn-info" >Like</button>
-                <span style="border: 1px solid blue">{{ likesCount }}</span>
-                <!-- Bouton Dislike -->
-                <button  type="button" class="btn btn-warning" >Dislike</button>
-                <span style="border: 1px solid red">{{ dislikesCount }}</span>
 
-                <button @click="updatePost" type="button" class="btn btn-primary">Modifier</button>
+                    <div class="position-relative" id="likeButton">
+                        <!-- Bouton Like -->
+                        <button @click="toLike" type="button" class="btn btn-info"><span class="badge text-bg-secondary">{{ likesCount }}</span>Like</button>
+
+                        <!-- Bouton Dislike -->
+                        <button @click="toDislike" type="button" class="btn btn-warning"><span class="badge text-bg-secondary">{{ dislikesCount }}</span>Dislike</button>
+                    </div>
+
             </div>
-            <button v-on:click="deletePost">Supprimer</button>
+
+            <!-- Boutons de suppression et de modification-->
+            <div class="d-flex justify-content-around">
+                <button @click="updatePost" type="button" class="btn btn-primary">Modifier</button>
+                <button v-on:click="deletePost" type="button" class="btn btn-danger">Supprimer</button>
+            </div>
 
 
-        <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion accordion-flush mt-4" id="accordionFlush">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
                     <!--Création de commentaire--> 
-                    <label for="postComment" class="form-label">Laisser un commentaire</label>
-                    <input type="text" name="postComment" class="form-control" id="postComment" v-model="comment">
+                    <label for="postComment" class="form-label" id="letCommentary">Laisser un commentaire</label>
+                    <input type="text" name="postComment" class="form-control mb-2" id="postComment" v-model="comment">
                     <!-- Bouton de publication d'un commentaire -->
                     <button  @click="commentCreation" type="button" class="btn btn-primary">Commenter</button>
                     <!--Liste des commentaires--> 
-                    <button @click="commentsDisplay" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <button @click="commentsDisplay" class="accordion-button collapsed mt-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                         Liste des commentaires
                     </button>
                 </h2>
@@ -114,13 +120,13 @@ import axios from 'axios'
         // Ajout d'un like.
             toLike(){
                 axios
-                    .post(`/posts/${this.$route.params.id}`, {
+                    .post(`/posts/like/${this.$route.params.id}`, {
                         userId: this.$store.state.userId,
-                        postId: `${this.$route.params.id}`,
-                        likesCount: this.likesCount += 1
+                        postId: this.$route.params.id,
                     }) 
                     .then((response) => {
                         console.log(response)
+                        this.likesCount += 1
                     })
                     .catch((error) => {
                         console.log(error)
@@ -130,9 +136,9 @@ import axios from 'axios'
         // Ajout d'un dislike
             toDislike(){
                 axios
-                    .post(`/posts/${this.$route.params.id}`, {
+                    .post(`/posts/dislike/${this.$route.params.id}`, {
                         userId: this.$store.state.userId,
-                        postId: `${this.$route.params.id}`,
+                        postId: this.$route.params.id,
                         dislikesCount: this.dislikesCount +=1
                     })
                     .then((response) => {
@@ -173,9 +179,6 @@ import axios from 'axios'
                         this.comments = response.data
 
                         console.log(this.comments)
-          
-                        // const result = this.comments.filter(comment => postId == comment.postId)
-                        // console.log(result)
 
                     
                     })
@@ -194,6 +197,31 @@ import axios from 'axios'
 div.card{
     align-self: center;
     width: 20em;
+    background-color: #FFD7D7;
 }
+
+.card-text{
+    background-color: white;
+    text-align: left;
+    padding: 1em 1em 1em 1em;
+    border: 1px solid rgb(173, 171, 171);
+    border-radius: 0.15em; 
+}
+
+#likeButton{
+    bottom: 1em;
+    left: 3.5em
+}
+
+#flush-headingOne{
+    background-color: #FFD7D7;
+
+}
+
+#letCommentary{
+        font-size: 0.6em;
+}
+
+
 
 </style>

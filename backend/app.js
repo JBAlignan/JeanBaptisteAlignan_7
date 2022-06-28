@@ -40,8 +40,8 @@ app.use("/api/posts", postRoutes)
 //Enregistrement des routes de commentaires.
 app.use("/api/comments", commentRoutes)
 //Enregistrement des routes des likes.
-app.use("api/posts/:id", likeRoutes)
+app.use("/api/posts/like/:id", likeRoutes)
 //Enregistement des routes des dislikes.
-app.use("api/posts/:id", dislikeRoutes)
+app.use("/api/posts/dislike/:id", dislikeRoutes)
 
 module.exports = app
