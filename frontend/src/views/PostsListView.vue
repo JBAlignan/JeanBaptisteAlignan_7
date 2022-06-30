@@ -2,7 +2,7 @@
 
     <div id="body" class="d-inline-flex p-2 justify-content-center">
         <div class="row container justify-content-center">
-            <h2 class="col-md-9">Bonjour {{ $store.state.firstName }} {{ $store.state.lastName }}</h2>
+            <h2 class="col-md-9">Bonjour {{ userObject.firstName }} {{ userObject.lastName }}</h2>
 
     <!-- Formulaire de création d'une publication -->
             <div class="form-floating col-md-9">
@@ -54,6 +54,7 @@ export default {
             userId: '',
             posts: null,
             imageUrl: null,
+            userObject: JSON.parse(localStorage.getItem("userData"))
         }
     },
     methods:{
@@ -68,7 +69,9 @@ export default {
 
             // Upload d'un fichier.
                 const fd = new FormData();
+                if(this.imageUrl){
                 fd.append('image', this.imageUrl, this.imageUrl.name)
+                }
                 fd.append('post', JSON.stringify({
 
                     content: this.content,

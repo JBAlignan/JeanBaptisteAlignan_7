@@ -19,7 +19,7 @@ const auth = require('../middleware/auth')
         Post.create({ 
                 userId: post.userId,
                 content: post.content,
-                imageUrl: req.file.filename
+                imageUrl: req?.file?.filename
         })
         .then(post => res.status(201).json(post))
         .catch(error => res.status(401).json({ error: error }))

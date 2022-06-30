@@ -2,11 +2,20 @@
 const db = require('../models/index');
 // Importation du modèle Like.
 const { Likes } = db.sequelize.models;
-
+const { Dislike } = db.sequelize.models;
 
 
 const auth = require('../middleware/auth');
 
+    //Cherche si le userId est présent dans le tableau passé en paramètre.
+    // function checkArrayUsers (arrayUsers, userId){
+    //     return arrayUsers.find(id => id === userId);
+    // };
+
+    //Retourne un nouveau tableau sans l'userId passé en paramètre.
+    // function newUserArray (arrayUsers, userId){
+    //     return arrayUsers.filter(id => id !== userId)
+    // };
 
 //--CRUD
 
@@ -32,6 +41,7 @@ const auth = require('../middleware/auth');
                 });
                 res.status(201).json({ message: "Like ajouté" });
             }
+            // Si il n'y a pas match entre le postId et le userId.
         
         })
         .catch(error => res.status(401).json({ error: error }))

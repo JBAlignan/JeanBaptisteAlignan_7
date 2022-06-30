@@ -4,7 +4,7 @@
         <div class="card-body">
             <p class="card-text">{{ content }}</p>
             <div class="form-floating">
-                <textarea class="form-control" placeholder="Ecrivez ici" id="updatePost" style="height: 100px" v-model="content"></textarea>
+                <textarea class="form-control" placeholder="Ecrivez ici" id="updatePost" style="height: 100px" v-model="content" v-if="userId === postUserId"></textarea>
                 <label for="updatePost"></label>
 
                     <div class="position-relative" id="likeButton">
@@ -58,6 +58,7 @@ import axios from 'axios'
         data(){
             return {
                 userId: '',
+                postUserId: '',
                 postId: '',
                 content: '',
                 comment: '',
@@ -68,12 +69,14 @@ import axios from 'axios'
         },
 
         mounted() {
+            this.userId = this.$store.state.userId
                 axios
                     .get(`/posts/${this.$route.params.id}`, {
                     })
                     .then((response) => {
                         console.log(response.data)
                         this.content = response.data.post.content
+                        this.postUserId = response.data.post.userId
                     })
                     .catch((error) => {
                         console.log(error)
@@ -122,12 +125,15 @@ import axios from 'axios'
             toLike(){
                 axios
                     .post(`/posts/like/${this.$route.params.id}`, {
+                        headers : {
+                    'Authorization' : `Bearer ${this.$store.state.userToken}`
+                    },
                         userId: this.$store.state.userId,
                         postId: this.$route.params.id,
+                        likesCount: this.likesCount
                     }) 
                     .then((response) => {
                         console.log(response)
-                        this.likesCount += 1
                     })
                     .catch((error) => {
                         console.log(error)

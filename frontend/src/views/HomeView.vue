@@ -51,10 +51,19 @@ export default {
           if (!response.data.token) {
             this.errormessage = response.data.error;
           } else {
-          this.$store.commit('USER_FIRSTNAME', response.data.firstName)
-          this.$store.commit('USER_LASTNAME', response.data.lastName)
-          this.$store.commit('USER_ID', response.data.userId)
-          this.$store.commit('USER_TOKEN', response.data.token)
+
+            
+            localStorage.setItem("userData", response.data)
+            console.log(localStorage.setItem("userData", JSON.stringify(response.data)))
+
+            JSON.parse(localStorage.getItem("userData"))
+            // console.log(userObject.firstName)
+            
+           
+          // this.$store.commit('USER_FIRSTNAME', response.data.firstName)
+          // this.$store.commit('USER_LASTNAME', response.data.lastName)
+          // this.$store.commit('USER_ID', response.data.userId)
+          // this.$store.commit('USER_TOKEN', response.data.token)
           router.push({ name: 'PostsList' })
           }
         })
