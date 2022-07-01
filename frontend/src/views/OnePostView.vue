@@ -3,6 +3,18 @@
     <div class="card">
         <div class="card-body">
             <p class="card-text">{{ content }}</p>
+
+
+
+
+                <div class="text-center">
+                    <img class="img-fluid col-sm-8 col-md-10 mb-4" v-if="this.imageUrl" v-bind:src="`http://localhost:3000/images/${this.imageUrl}`"/>
+                </div>
+
+
+
+
+
             <div class="form-floating">
                 <textarea class="form-control" placeholder="Ecrivez ici" id="updatePost" style="height: 100px" v-model="content" v-if="userId === postUserId"></textarea>
                 <label for="updatePost"></label>
@@ -19,8 +31,8 @@
 
             <!-- Boutons de suppression et de modification-->
             <div class="d-flex justify-content-around">
-                <button @click="updatePost" type="button" class="btn btn-primary">Modifier</button>
-                <button @click="deletePost" type="button" class="btn btn-danger">Supprimer</button>
+                <button @click="updatePost" type="button" class="btn btn-primary" v-if="userId === postUserId">Modifier</button>
+                <button @click="deletePost" type="button" class="btn btn-danger" v-if="userId === postUserId">Supprimer</button>
             </div>
 
 
@@ -57,10 +69,12 @@ import axios from 'axios'
         name: 'OnePostView',
         data(){
             return {
+                userObject: JSON.parse(localStorage.getItem("userData")),
                 userId: '',
                 postUserId: '',
                 postId: '',
                 content: '',
+                imageUrl: '',
                 comment: '',
                 comments: [],
                 likesCount: 0,
@@ -69,14 +83,18 @@ import axios from 'axios'
         },
 
         mounted() {
-            this.userId = this.$store.state.userId
+            this.userId = this.userObject.userId
                 axios
                     .get(`/posts/${this.$route.params.id}`, {
                     })
                     .then((response) => {
                         console.log(response.data)
                         this.content = response.data.post.content
+                        this.imageUrl = response.data.post.imageUrl
                         this.postUserId = response.data.post.userId
+                        console.log(this.userId)
+                        console.log(this.postUserId)
+
                     })
                     .catch((error) => {
                         console.log(error)
@@ -87,12 +105,13 @@ import axios from 'axios'
 
         // Modification d'une publication.
             updatePost(){
-                axios
+                this.userId = this.userObject.userId
+                if (this.postUserId == this.userId){axios
                     .put(`/posts/${this.$route.params.id}`, {
                         content: this.content,
                     }, {
                         headers: {
-                        'Authorization' : `Bearer ${this.$store.state.userToken}`
+                        'Authorization' : `Bearer ${this.userObject.token}`
                         }
                     })
                     .then((response) => {
@@ -102,23 +121,32 @@ import axios from 'axios'
                     .catch((error) => {
                         console.log(error)
                     })
+                }
+                    
             },
 
         // Suppression d'une publication.
             deletePost() {
-                axios
-                    .delete(`/posts/${this.$route.params.id}`, {
-                        headers: {
-                        'Authorization' : `Bearer ${this.$store.state.userToken}`
+                console.log(this.postUserId)
+                console.log(this.userId)
+                if (this.postUserId == this.userId){
+                    axios
+                        .delete(`/posts/${this.$route.params.id}`
+                         ,{
+                            headers: {
+                            'Authorization' : `Bearer ${this.userObject.token}`
+                            }
                         }
-                    })
-                    .then((response) => {
-                        console.log(response)
-                        this.$router.back()
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    })
+                        )
+                        .then((response) => {
+                            console.log(response)
+                            this.$router.back()
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                        })
+                }
+                
             },
 
         // Ajout d'un like.
@@ -126,7 +154,7 @@ import axios from 'axios'
                 axios
                     .post(`/posts/like/${this.$route.params.id}`, {
                         headers : {
-                    'Authorization' : `Bearer ${this.$store.state.userToken}`
+                            'Authorization' : `Bearer ${this.userObject.token}`
                     },
                         userId: this.$store.state.userId,
                         postId: this.$route.params.id,
@@ -144,7 +172,7 @@ import axios from 'axios'
             toDislike(){
                 axios
                     .post(`/posts/dislike/${this.$route.params.id}`, {
-                        userId: this.$store.state.userId,
+                        userId: this.userObject.userId,
                         postId: this.$route.params.id,
                         dislikesCount: this.dislikesCount +=1
                     })
@@ -160,12 +188,12 @@ import axios from 'axios'
             commentCreation(){
                 axios
                     .post('/comments', {
-                        userId: this.$store.state.userId,
+                        userId: this.userObject.userId,
                         postId: this.postId,
                         comment: this.comment,
                         }, {
                         headers: {
-                        'Authorization' : `Bearer ${this.$store.state.userToken}`
+                        'Authorization' : `Bearer ${this.userObject.token}`
                         }
                     })
                     .then((response) => {

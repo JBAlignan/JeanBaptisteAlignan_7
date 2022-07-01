@@ -50,11 +50,11 @@ export default {
     data(){
 
         return {
+            userObject: JSON.parse(localStorage.getItem("userData")),
             content: '',
             userId: '',
             posts: null,
-            imageUrl: null,
-            userObject: JSON.parse(localStorage.getItem("userData"))
+            imageUrl: null
         }
     },
     methods:{
@@ -76,12 +76,12 @@ export default {
 
                     content: this.content,
                     // Permet l'envoi de la valeur de userId à la BDD.
-                    userId: this.$store.state.userId,
+                    userId: this.userObject.userId,
                     imageUrl: this.imageUrl,
                 }))
                 axios.post('/posts', fd, {
                     headers : {
-                    'Authorization' : `Bearer ${this.$store.state.userToken}`
+                    'Authorization' : `Bearer ${this.userObject.token}`
                     },
                 })
                     .then (response => {
