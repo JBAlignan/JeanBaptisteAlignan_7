@@ -2,7 +2,10 @@
 
     <div id="body" class="d-inline-flex p-2 justify-content-center">
         <div class="row container justify-content-center">
-            <h2 class="col-md-9">Bonjour {{ userObject.firstName }} {{ userObject.lastName }}</h2>
+
+            <h2 class="col-md-9">Bonjour {{ userObject.firstName }} {{ userObject.lastName }}
+
+</h2>
 
     <!-- Formulaire de création d'une publication -->
             <div class="form-floating col-md-9">
@@ -119,6 +122,16 @@ export default {
         font-size: 1.5em;
         text-align: start;
     }
+
+    // .fa-regular{
+    //     font-family: "Font Awesome 5 Free";
+    //     font-Weight: 900;
+        
+    //     position: absolute;
+    //     color: green;
+    //     width: 2em;
+    //     height: 2em;
+    // }
 
     .card-body{
         display: flex;

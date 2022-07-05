@@ -3,18 +3,9 @@
     <div class="card">
         <div class="card-body">
             <p class="card-text">{{ content }}</p>
-
-
-
-
                 <div class="text-center">
                     <img class="img-fluid col-sm-8 col-md-10 mb-4" v-if="this.imageUrl" v-bind:src="`http://localhost:3000/images/${this.imageUrl}`"/>
                 </div>
-
-
-
-
-
             <div class="form-floating">
                 <textarea class="form-control" placeholder="Ecrivez ici" id="updatePost" style="height: 100px" v-model="content" v-if="userId === postUserId"></textarea>
                 <label for="updatePost"></label>
@@ -43,6 +34,8 @@
                     <label for="postComment" class="form-label" id="letCommentary">Laisser un commentaire</label>
                     <input type="text" name="postComment" class="form-control mb-2" id="postComment" v-model="comment">
                     <!-- Bouton de publication d'un commentaire -->
+                    
+
                     <button  @click="commentCreation" type="button" class="btn btn-primary">Commenter</button>
                     <!--Liste des commentaires--> 
                     <button @click="commentsDisplay" class="accordion-button collapsed mt-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -106,7 +99,8 @@ import axios from 'axios'
         // Modification d'une publication.
             updatePost(){
                 this.userId = this.userObject.userId
-                if (this.postUserId == this.userId){axios
+                if (this.postUserId == this.userId){
+                    axios
                     .put(`/posts/${this.$route.params.id}`, {
                         content: this.content,
                     }, {
@@ -152,13 +146,11 @@ import axios from 'axios'
         // Ajout d'un like.
             toLike(){
                 axios
-                    .post(`/posts/like/${this.$route.params.id}`, {
+                    .get(`/posts/like/${this.$route.params.id}`, {
                         headers : {
                             'Authorization' : `Bearer ${this.userObject.token}`
                     },
-                        userId: this.$store.state.userId,
-                        postId: this.$route.params.id,
-                        likesCount: this.likesCount
+
                     }) 
                     .then((response) => {
                         console.log(response)

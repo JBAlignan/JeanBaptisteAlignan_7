@@ -4,12 +4,12 @@
             <div class="row justify-content-end">
                 <div class="col-lg-4">
                     <h1>
-                        <a href="http://localhost:8080/#/publications" id="logo" alt="Accueil Groupomania" ><img src="../assets/groupomaniaLogoSm.png" class ="img-fluid" alt="Groupomania" />
-                        </a>
+                        <router-link to="/publications" id="logo" alt="Accueil Groupomania"><img src="../assets/groupomaniaLogoSm.png" class ="img-fluid" alt="Groupomania" />
+                        </router-link>
                     </h1>
                 </div>
                 <div class="col-lg-4 d-lg-flex align-items-end flex-column align-self-center">
-                    <button type="button" class="btn btn-light" v-on:click="logout">Déconnexion</button>
+                    <button type="button" class="btn btn-light" v-on:click="logout" >Déconnexion</button>
                     <router-link to="/profil" type="button" class=" btn bg-info text-white">Profil</router-link>
 
                 </div>
@@ -26,6 +26,7 @@
     export default {
         name: 'HeaderView',
 
+
         methods: {
             logout (){
                 console.log(this.userObject)
@@ -33,6 +34,10 @@
                 localStorage.clear()
                 
                 this.$router.push('/')
+            },
+
+            getCurrentUser () {
+                return JSON.parse(localStorage.getItem('UserId'))
             }
         }
     }
