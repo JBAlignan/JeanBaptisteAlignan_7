@@ -23,7 +23,7 @@
                     <div class="col-lg-6 gy-5 d-flex justify-content-center"  v-for='post in posts' :key='post.id'>
                         <div class="card col-12" >
                             <div class="card-body">
-                                <p class="card-text align-self-start px-2" style="border: 1px solid black">{{ post.content }}</p>
+                                <p class="card-text align-self-start px-2 bg-light text-dark rounded" v-if="post.content">{{ post.content }}</p>
                                     <div class="text-center">
                                         <img class="img-fluid col-sm-8 col-md-10 mb-4" v-if="post.imageUrl" v-bind:src="`http://localhost:3000/images/${post.imageUrl}`"/>
                                     </div>
@@ -124,6 +124,13 @@ export default {
         display: flex;
         flex-direction: column;
         background-color: #FFD7D7;
+    }
+
+    .card-text{
+        border: 1px solid grey;
+        margin: auto;
+        margin-bottom: 1em;
+        text-align: start;
     }
 
 </style>

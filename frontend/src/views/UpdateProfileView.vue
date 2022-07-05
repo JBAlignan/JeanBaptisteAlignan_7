@@ -1,10 +1,21 @@
-<script>
+//     <script>
 
-export default {
-    name: 'UpdateProfil'
-}
+//     import axios from 'axios'
+    
 
-</script>
+//     export default {
+//         name: 'UpdateProfil',
+//         data(){
+//             return {
+//                 firstName:"",
+//                 lastName:"",
+//                 email: "",
+//                 password:""
+//             }
+//         }
+//     }
+
+// </script>
 
     <template>
 
@@ -34,6 +45,8 @@ export default {
         </form>
 
     </template>
+
+
 
 <style lang="scss">
 

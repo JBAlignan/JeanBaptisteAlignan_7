@@ -10,6 +10,8 @@
                 </div>
                 <div class="col-lg-4 d-lg-flex align-items-end flex-column align-self-center">
                     <button type="button" class="btn btn-light" v-on:click="logout">Déconnexion</button>
+                    <router-link to="/profil" type="button" class=" btn bg-info text-white">Profil</router-link>
+
                 </div>
             </div>
         </div>
@@ -18,10 +20,11 @@
 
 <script>
 
+    // import router from '../router/index'
+
+
     export default {
         name: 'HeaderView',
-
-
 
         methods: {
             logout (){
