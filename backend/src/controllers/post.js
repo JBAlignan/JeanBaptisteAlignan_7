@@ -16,11 +16,13 @@ const auth = require('../middleware/auth')
     exports.createPost = (req, res, next) => {
         console.log(req.body)
         const post = JSON.parse(req.body.post)
-        Post.create({ 
+        Post.create({
                 userId: post.userId,
                 content: post.content,
                 imageUrl: req?.file?.filename
         })
+
+        
         .then(post => res.status(201).json(post))
         .catch(error => res.status(401).json({ error: error }))
     }

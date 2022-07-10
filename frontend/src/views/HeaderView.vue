@@ -9,7 +9,7 @@
                     </h1>
                 </div>
                 <div class="col-lg-4 d-lg-flex align-items-end flex-column align-self-center">
-                    <button type="button" class="btn btn-light" v-on:click="logout" >Déconnexion</button>
+                    <button type="button" class="btn btn-light" v-on:click="logout" v-if="localStorage == null">Déconnexion</button>
                     <router-link to="/profil" type="button" class=" btn bg-info text-white">Profil</router-link>
 
                 </div>
@@ -26,14 +26,23 @@
     export default {
         name: 'HeaderView',
 
+       data() {
+        return {
+        localStorage: JSON.parse(localStorage.getItem('UserData'))
+        }
+       },
 
         methods: {
             logout (){
-                console.log(this.userObject)
+
                 console.log("deconnection")
                 localStorage.clear()
-                
                 this.$router.push('/')
+                this.$forceUpdate()
+            },
+
+            changeLogoLink() {
+                this.$emit('custom-event-name', { message: 'Mon message personnalisé' })
             },
 
             getCurrentUser () {

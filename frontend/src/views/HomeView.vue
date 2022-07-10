@@ -37,6 +37,7 @@ export default {
   name: 'HomeView',
   data() {
     return {
+   
         email: '',
         password: '',
     }
@@ -54,13 +55,9 @@ export default {
           } else {
           
             localStorage.setItem("userData", JSON.stringify(response.data))
-    
+            router.push({ name: 'PostsList' })
+            
 
-          // this.$store.commit('USER_FIRSTNAME', response.data.firstName)
-          // this.$store.commit('USER_LASTNAME', response.data.lastName)
-          // this.$store.commit('USER_ID', response.data.userId)
-          // this.$store.commit('USER_TOKEN', response.data.token)
-          router.push({ name: 'PostsList' })
           }
         })
         .catch((error) => {
