@@ -2,6 +2,7 @@
 const db = require('../models/index');
 // Importation du modèle Post.
 const { Post } = db.sequelize.models;
+const { User } = db.sequelize.models;
 const fs = require('fs')
 
 const auth = require('../middleware/auth')
@@ -34,7 +35,11 @@ const auth = require('../middleware/auth')
         Post.findAll({
             order: [
                 ["createdAt", "DESC"]
-            ]
+            ],
+            include: {
+                model: User,
+                as: 'Author'
+            },
         })
         .then(posts => res.status(200).json(posts))
         .catch(error => res.status(400).json({ error }));

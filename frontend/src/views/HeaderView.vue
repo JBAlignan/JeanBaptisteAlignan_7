@@ -41,9 +41,9 @@
                 this.$forceUpdate()
             },
 
-            changeLogoLink() {
-                this.$emit('custom-event-name', { message: 'Mon message personnalisé' })
-            },
+            // changeLogoLink() {
+            //     this.$emit('custom-event-name', { message: 'Mon message personnalisé' })
+            // },
 
             getCurrentUser () {
                 return JSON.parse(localStorage.getItem('UserId'))

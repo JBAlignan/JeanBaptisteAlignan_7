@@ -8,6 +8,7 @@ const likeCtrl = require('../controllers/like');
 
 // Routes pour l'envoi du schéma rempli au serveur.
 router.post('/', likeCtrl.toLike);
+router.get('/', likeCtrl.toLike)
 
 module.exports = router;
 

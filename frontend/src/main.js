@@ -7,7 +7,6 @@ import axios from 'axios'
 // Importation de Bootstrap.
 import "bootstrap"
 import "bootstrap/dist/css/bootstrap.min.css"
-import store from './store'
 
 // Configuration d'Axios pour les requêtes.
 // L'instruction suivante permet de définir  Axios comme outil par défaut pour gérer les requêtes.
@@ -21,6 +20,5 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  store,
   render: h => h(App)
 }).$mount('#app')

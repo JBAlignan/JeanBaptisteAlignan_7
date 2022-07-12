@@ -57,7 +57,8 @@ export default {
             content: '',
             userId: '',
             posts: null,
-            imageUrl: null
+            imageUrl: null,
+            Auth: ''
         }
     },
     methods:{
@@ -96,6 +97,7 @@ export default {
             },
 
     },
+
     mounted() {
             // Affichage des publications de la BDD.
                 axios
@@ -103,6 +105,8 @@ export default {
                 })
                 .then((response) => {
                     console.log(response.data)
+                    // console.log(response.data.User)
+                    // console.log(this.Author.firstName)
                     this.posts = response.data
 
                     return this.posts
