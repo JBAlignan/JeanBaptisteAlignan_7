@@ -11,7 +11,7 @@ const userRoutes = require("./src/routes/user")
 const postRoutes = require("./src/routes/post")
 const commentRoutes = require("./src/routes/comment")
 const likeRoutes = require("./src/routes/like")
-const dislikeRoutes = require("./src/routes/dislike")
+
 // Variables d'environnement pour éviter l'accès à des données sensibles.
 require("dotenv").config()
 
@@ -40,8 +40,7 @@ app.use("/api/posts", postRoutes)
 //Enregistrement des routes de commentaires.
 app.use("/api/comments", commentRoutes)
 //Enregistrement des routes des likes.
-app.use("/api/posts/like/:id", likeRoutes)
-//Enregistement des routes des dislikes.
-app.use("/api/posts/dislike/:id", dislikeRoutes)
+app.use("/api/posts/likes", likeRoutes)
+
 
 module.exports = app

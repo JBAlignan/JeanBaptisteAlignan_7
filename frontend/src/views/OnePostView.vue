@@ -12,10 +12,7 @@
 
                     <div class="position-relative" id="likeButton">
                         <!-- Bouton Like -->
-                        <button @click="toLike" type="button" class="btn btn-info"><span class="badge text-bg-secondary">{{ likesCount }}</span>Like</button>
-
-                        <!-- Bouton Dislike -->
-                        <button @click="toDislike" type="button" class="btn btn-warning"><span class="badge">{{ dislikesCount }}</span>Dislike</button>
+                        <button @click="likeHandler" type="button" class="btn btn-info"><span class="badge text-bg-secondary">{{ likesCount }}</span>Like</button>
                     </div>
 
             </div>
@@ -71,7 +68,6 @@ import axios from 'axios'
                 comment: '',
                 comments: [],
                 likesCount: 0,
-                dislikesCount: 0
             }
         },
 
@@ -81,13 +77,9 @@ import axios from 'axios'
                     .get(`/posts/${this.$route.params.id}`, {
                     })
                     .then((response) => {
-                        console.log(response.data)
                         this.content = response.data.post.content
                         this.imageUrl = response.data.post.imageUrl
                         this.postUserId = response.data.post.userId
-                        console.log(this.userId)
-                        console.log(this.postUserId)
-
                     })
                     .catch((error) => {
                         console.log(error)
@@ -121,8 +113,6 @@ import axios from 'axios'
 
         // Suppression d'une publication.
             deletePost() {
-                console.log(this.postUserId)
-                console.log(this.userId)
                 if (this.postUserId == this.userId){
                     axios
                         .delete(`/posts/${this.$route.params.id}`
@@ -144,29 +134,18 @@ import axios from 'axios'
             },
 
         // Ajout d'un like.
-            toLike(){
+            likeHandler(){
+                
                 axios
-                    .get(`/posts/like/${this.$route.params.id}`, {
+                    .post(`/posts/likes/${this.$route.params.id}`,
+                        {   
+                            postId: this.postId,
+                            userId: this.userId,
+                            likesCount: this.likeCounts += 1
+                        }, {
                         headers : {
                             'Authorization' : `Bearer ${this.userObject.token}`
-                    },
-
-                    }) 
-                    .then((response) => {
-                        console.log(response)
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    })
-            },
-
-        // Ajout d'un dislike
-            toDislike(){
-                axios
-                    .post(`/posts/dislike/${this.$route.params.id}`, {
-                        userId: this.userObject.userId,
-                        postId: this.$route.params.id,
-                        dislikesCount: this.dislikesCount +=1
+                        }
                     })
                     .then((response) => {
                         console.log(response)

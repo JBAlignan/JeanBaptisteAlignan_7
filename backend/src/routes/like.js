@@ -7,8 +7,8 @@ const auth = require('../middleware/auth');
 const likeCtrl = require('../controllers/like');
 
 // Routes pour l'envoi du schéma rempli au serveur.
-router.post('/', likeCtrl.toLike);
-router.get('/', likeCtrl.toLike)
+router.post('/:id', likeCtrl.likeHandler);
+router.get('/', likeCtrl.likeHandler)
 
 module.exports = router;
 

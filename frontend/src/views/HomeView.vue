@@ -53,11 +53,8 @@ export default {
           if (!response.data.token) {
             this.errormessage = response.data.error;
           } else {
-          
             localStorage.setItem("userData", JSON.stringify(response.data))
             router.push({ name: 'PostsList' })
-            
-
           }
         })
         .catch((error) => {

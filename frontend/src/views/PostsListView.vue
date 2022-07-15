@@ -23,9 +23,10 @@
 
     <!-- Liste des publications -->
                 <div class="row">
-                    <div class="col-lg-6 gy-5 d-flex justify-content-center"  v-for='post in posts' :key='post.id'>
+                    <div class="col-lg-6 gy-5 d-flex justify-content-center" v-for='post in posts' :key='post.id'>
                         <div class="card col-12" >
                             <div class="card-body">
+                                <p>{{ post.Author.firstName }} {{post.Author.lastName}}</p>
                                 <p class="card-text align-self-start px-2 bg-light text-dark rounded" v-if="post.content">{{ post.content }}</p>
                                     <div class="text-center">
                                         <img class="img-fluid col-sm-8 col-md-10 mb-4" v-if="post.imageUrl" v-bind:src="`http://localhost:3000/images/${post.imageUrl}`"/>
@@ -58,7 +59,6 @@ export default {
             userId: '',
             posts: null,
             imageUrl: null,
-            Auth: ''
         }
     },
     methods:{
@@ -70,7 +70,7 @@ export default {
 
             // Création d'une publication.
             postCreation(){
-
+                if (this.imageUrl !== null && this.content.length > 3) {
             // Upload d'un fichier.
                 const fd = new FormData();
                 if(this.imageUrl){
@@ -94,7 +94,7 @@ export default {
                     .catch((error) => {
                         console.log(error)
                 })
-            },
+            }},
 
     },
 
@@ -105,8 +105,6 @@ export default {
                 })
                 .then((response) => {
                     console.log(response.data)
-                    // console.log(response.data.User)
-                    // console.log(this.Author.firstName)
                     this.posts = response.data
 
                     return this.posts

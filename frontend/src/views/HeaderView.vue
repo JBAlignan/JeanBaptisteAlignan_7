@@ -9,9 +9,8 @@
                     </h1>
                 </div>
                 <div class="col-lg-4 d-lg-flex align-items-end flex-column align-self-center">
-                    <button type="button" class="btn btn-light" v-on:click="logout" v-if="localStorage == null">Déconnexion</button>
+                    <button type="button" class="btn btn-light" v-on:click="logout" v-if="userDatas == null">Déconnexion</button>
                     <router-link to="/profil" type="button" class=" btn bg-info text-white">Profil</router-link>
-
                 </div>
             </div>
         </div>
@@ -28,7 +27,7 @@
 
        data() {
         return {
-        localStorage: JSON.parse(localStorage.getItem('UserData'))
+        userDatas: JSON.parse(localStorage.getItem('UserData'))
         }
        },
 
