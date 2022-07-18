@@ -4,13 +4,13 @@
             <div class="row justify-content-end">
                 <div class="col-lg-4">
                     <h1>
-                        <router-link to="/publications" id="logo" alt="Accueil Groupomania"><img src="../assets/groupomaniaLogoSm.png" class ="img-fluid" alt="Groupomania" />
+                        <router-link to="/" id="logo" alt="Accueil Groupomania"><img src="../assets/groupomaniaLogoSm.png" class ="img-fluid" alt="Groupomania" />
                         </router-link>
                     </h1>
                 </div>
                 <div class="col-lg-4 d-lg-flex align-items-end flex-column align-self-center">
                     <button type="button" class="btn btn-light" v-on:click="logout" v-if="userDatas == null">Déconnexion</button>
-                    <router-link to="/profil" type="button" class=" btn bg-info text-white">Profil</router-link>
+                    <router-link :to="{ name:'Profil', params: { id: userId } }" type="button" class=" btn bg-info text-white">Profil</router-link>
                 </div>
             </div>
         </div>
@@ -19,7 +19,6 @@
 
 <script>
 
-    // import router from '../router/index'
 
 
     export default {
@@ -27,13 +26,12 @@
 
        data() {
         return {
-        userDatas: JSON.parse(localStorage.getItem('UserData'))
+        userId: localStorage.getItem('UserData')
         }
        },
 
         methods: {
-            logout (){
-
+            logout() {
                 console.log("deconnection")
                 localStorage.clear()
                 this.$router.push('/')

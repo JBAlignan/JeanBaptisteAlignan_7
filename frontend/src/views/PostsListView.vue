@@ -48,7 +48,6 @@
 // Gestion de l'affichage des publications de l'API.
 import axios from 'axios'
 
-
 export default {
     name: 'PostsListView',
     data(){
@@ -83,11 +82,12 @@ export default {
                     userId: this.userObject.userId,
                     imageUrl: this.imageUrl,
                 }))
-                axios.post('/posts', fd, {
-                    headers : {
-                    'Authorization' : `Bearer ${this.userObject.token}`
-                    },
-                })
+                axios
+                    .post('/posts', fd, {
+                        headers : {
+                        'Authorization' : `Bearer ${this.userObject.token}`
+                        },
+                    })
                     .then (response => {
                         console.log(response)
                     })
@@ -99,6 +99,7 @@ export default {
     },
 
     mounted() {
+
             // Affichage des publications de la BDD.
                 axios
                 .get("/posts", {

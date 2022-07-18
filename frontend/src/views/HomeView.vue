@@ -36,12 +36,12 @@ import router from '../router/index'
 export default {
   name: 'HomeView',
   data() {
-    return {
-   
+    return {   
         email: '',
         password: '',
     }
   },
+
   methods: {
     login(){
       axios
