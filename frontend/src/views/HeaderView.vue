@@ -9,7 +9,7 @@
                     </h1>
                 </div>
                 <div class="col-lg-4 d-lg-flex align-items-end flex-column align-self-center">
-                    <button type="button" class="btn btn-light" v-on:click="logout" v-if="userDatas == null">Déconnexion</button>
+                    <button type="button" class="btn btn-light" v-on:click="logout" v-if="userId">Déconnexion</button>
                     <router-link :to="{ name:'Profil', params: { id: userId } }" type="button" class=" btn bg-info text-white">Profil</router-link>
                 </div>
             </div>
@@ -26,7 +26,9 @@
 
        data() {
         return {
-        userId: localStorage.getItem('UserData')
+        userId: localStorage.getItem('UserData'),
+        // logoutButton: false
+        
         }
        },
 
@@ -34,17 +36,10 @@
             logout() {
                 console.log("deconnection")
                 localStorage.clear()
+                
                 this.$router.push('/')
-                this.$forceUpdate()
+                // this.$forceUpdate()
             },
-
-            // changeLogoLink() {
-            //     this.$emit('custom-event-name', { message: 'Mon message personnalisé' })
-            // },
-
-            getCurrentUser () {
-                return JSON.parse(localStorage.getItem('UserId'))
-            }
         }
     }
 </script>

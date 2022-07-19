@@ -3,9 +3,7 @@
     <div id="body" class="d-inline-flex p-2 justify-content-center">
         <div class="row container justify-content-center">
 
-            <h2 class="col-md-9">Bonjour {{ userObject.firstName }} {{ userObject.lastName }}
-
-</h2>
+            <h2 class="col-md-9">Bonjour {{ userObject.firstName }} {{ userObject.lastName }}</h2>
 
     <!-- Formulaire de création d'une publication -->
             <div class="form-floating col-md-9">
@@ -16,6 +14,7 @@
                 <div class="input-group mt-2">
                     <input type="file" @change="onFileSelected" class="form-control" id="postImg" aria-label="Upload">
                 </div>
+                <!-- <p class="alert alert-danger" role="alert">{{ message }}</p> -->
 
              <!-- Bouton de publication -->   
             <button @click="postCreation" type="button" class="btn btn-primary mt-4">Publier</button>
@@ -68,34 +67,35 @@ export default {
             },
 
             // Création d'une publication.
-            postCreation(){
+            postCreation() {
                 if (this.imageUrl !== null && this.content.length > 3) {
-            // Upload d'un fichier.
-                const fd = new FormData();
-                if(this.imageUrl){
-                fd.append('image', this.imageUrl, this.imageUrl.name)
-                }
-                fd.append('post', JSON.stringify({
+                    // Upload d'un fichier.
+                    const fd = new FormData();
+                    if (this.imageUrl){
+                        fd.append('image', this.imageUrl, this.imageUrl.name)
+                        }
+                    fd.append('post', JSON.stringify({
 
-                    content: this.content,
-                    // Permet l'envoi de la valeur de userId à la BDD.
-                    userId: this.userObject.userId,
-                    imageUrl: this.imageUrl,
-                }))
-                axios
-                    .post('/posts', fd, {
-                        headers : {
-                        'Authorization' : `Bearer ${this.userObject.token}`
-                        },
+                        content: this.content,
+                        // Permet l'envoi de la valeur de userId à la BDD.
+                        userId: this.userObject.userId,
+                        imageUrl: this.imageUrl,
+                    }))
+                    axios
+                        .post('/posts', fd, {
+                            headers : {
+                            'Authorization' : `Bearer ${this.userObject.token}`
+                            },
+                        })
+                        .then (response => {
+                            console.log(response)
+                            location.reload()
+
+                        })
+                        .catch((error) => {
+                            console.log(error)
                     })
-                    .then (response => {
-                        console.log(response)
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                })
             }},
-
     },
 
     mounted() {
