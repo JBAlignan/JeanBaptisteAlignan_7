@@ -25,8 +25,6 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-
-
 body {
   height: 100vh;
 }

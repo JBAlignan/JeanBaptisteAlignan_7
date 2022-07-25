@@ -15,11 +15,6 @@ const routes = [
     component: () => import('../views/SignUpView')
   },
   {
-    path: '/profil/:id',
-    name: 'Profil',
-    component: () => import ('../views/UpdateProfileView')
-  },
-  {
     path: '/publications',
     name: 'PostsList',
     component: () => import('../views/PostsListView')

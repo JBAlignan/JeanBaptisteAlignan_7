@@ -134,14 +134,12 @@ import axios from 'axios'
             },
 
         // Ajout d'un like.
-            likeHandler(){
-                
+            likeHandler() {         
                 axios
                     .post(`/posts/likes/${this.$route.params.id}`,
                         {   
-                            postId: this.postId,
+                            
                             userId: this.userId,
-                            likesCount: this.likeCounts += 1
                         }, {
                         headers : {
                             'Authorization' : `Bearer ${this.userObject.token}`
@@ -149,6 +147,12 @@ import axios from 'axios'
                     })
                     .then((response) => {
                         console.log(response)
+                        if (response.data.like) {
+                            this.likesCount +=1
+                        } else {
+                            this.likesCount -= 1
+                        }
+
                     })
                     .catch((error) => {
                         console.log(error)

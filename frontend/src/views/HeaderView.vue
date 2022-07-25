@@ -9,8 +9,7 @@
                     </h1>
                 </div>
                 <div class="col-lg-4 d-lg-flex align-items-end flex-column align-self-center">
-                    <button type="button" class="btn btn-light" v-on:click="logout" v-if="userId">Déconnexion</button>
-                    <router-link :to="{ name:'Profil', params: { id: userId } }" type="button" class=" btn bg-info text-white">Profil</router-link>
+                    <button type="button" class="btn btn-light" v-on:click="logout">Déconnexion</button>
                 </div>
             </div>
         </div>
@@ -19,27 +18,26 @@
 
 <script>
 
-
-
     export default {
         name: 'HeaderView',
 
-       data() {
-        return {
-        userId: localStorage.getItem('UserData'),
-        // logoutButton: false
+    //    data() {
+    //     return {
+    //     userId: localStorage.getItem('UserData'),
+    //     // logoutButton: false
         
-        }
-       },
+    //     }
+    //    },
+
+    computed : {
+      isLoggedIn : function(){ return this.$store.getters.isAuthenticated}
+    },
 
         methods: {
-            logout() {
-                console.log("deconnection")
-                localStorage.clear()
-                
-                this.$router.push('/')
-                // this.$forceUpdate()
-            },
+            async logout (){
+        await this.$store.dispatch('LogOut')
+        this.$router.push('/login')
+      }
         }
     }
 </script>
