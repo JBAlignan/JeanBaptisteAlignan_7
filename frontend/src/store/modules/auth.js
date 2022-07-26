@@ -51,7 +51,6 @@ const mutations = {
     },
     LogOut(state){
         state.user = null
-        
     },
 
 };

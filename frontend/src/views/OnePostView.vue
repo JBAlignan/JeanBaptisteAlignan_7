@@ -31,8 +31,6 @@
                     <label for="postComment" class="form-label" id="letCommentary">Laisser un commentaire</label>
                     <input type="text" name="postComment" class="form-control mb-2" id="postComment" v-model="comment">
                     <!-- Bouton de publication d'un commentaire -->
-                    
-
                     <button  @click="commentCreation" type="button" class="btn btn-primary">Commenter</button>
                     <!--Liste des commentaires--> 
                     <button @click="commentsDisplay" class="accordion-button collapsed mt-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -84,6 +82,17 @@ import axios from 'axios'
                     .catch((error) => {
                         console.log(error)
                     })
+        
+                // Récupération des likes de la BDD.
+                axios
+                    .get(`/posts/likes/${this.$route.params.id}`)
+                    .then((response) => {
+                        
+                        console.log(response.data)
+                    })
+                    .catch((error) => 
+                    console.log(error))
+            
         },
 
         methods: {
@@ -138,7 +147,6 @@ import axios from 'axios'
                 axios
                     .post(`/posts/likes/${this.$route.params.id}`,
                         {   
-                            
                             userId: this.userId,
                         }, {
                         headers : {
@@ -157,7 +165,7 @@ import axios from 'axios'
                     .catch((error) => {
                         console.log(error)
                     })
-            },
+            },   
 
         // Publication d'un commentaire.
             commentCreation(){
