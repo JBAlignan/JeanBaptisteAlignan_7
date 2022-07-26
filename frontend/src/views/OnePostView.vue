@@ -78,20 +78,25 @@ import axios from 'axios'
                         this.content = response.data.post.content
                         this.imageUrl = response.data.post.imageUrl
                         this.postUserId = response.data.post.userId
+                    // Récupération des likes de la BDD.
+                    axios
+                        .get(`/posts/likes/${this.$route.params.id}`, 
+                        {
+                        headers: {
+                        'Authorization' : `Bearer ${this.userObject.token}`
+                            }
+                        })
+                        .then((response) => {
+                            this.likesCount = response.data.total
+                        })
+                        .catch((error) => 
+                            console.log(error))
                     })
                     .catch((error) => {
                         console.log(error)
                     })
         
-                // Récupération des likes de la BDD.
-                axios
-                    .get(`/posts/likes/${this.$route.params.id}`)
-                    .then((response) => {
-                        
-                        console.log(response.data)
-                    })
-                    .catch((error) => 
-                    console.log(error))
+
             
         },
 

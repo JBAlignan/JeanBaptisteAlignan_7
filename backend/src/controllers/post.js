@@ -17,7 +17,7 @@ const auth = require('../middleware/auth')
     exports.createPost = (req, res, next) => {
         console.log(req.body)
         const post = JSON.parse(req.body.post)
-        if (post.imageUrl !== null && post.content.length > 3) {
+        if (post.imageUrl !== null || post.content.length > 3) {
         Post.create({
                 userId: post.userId,
                 content: post.content,

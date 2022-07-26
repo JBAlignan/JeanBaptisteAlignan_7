@@ -68,7 +68,7 @@ export default {
 
             // Création d'une publication.
             postCreation() {
-                if (this.imageUrl !== null && this.content.length > 3) {
+                if (this.imageUrl !== null || this.content.length > 3) {
                     // Upload d'un fichier.
                     const fd = new FormData();
                     if (this.imageUrl){

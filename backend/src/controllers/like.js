@@ -17,7 +17,7 @@ const auth = require('../middleware/auth');
     exports.likeHandler = (req, res, next) => {
         const userId = req.body.userId;
         const postId = req.params.id;
-
+        console.log(req.body)
         Likes.findOne({ where: { postId: postId, userId: userId } })
             .then((like) => {
                 console.log(like)
@@ -29,8 +29,17 @@ const auth = require('../middleware/auth');
                         postId: postId,
                         userId: userId,
                     })
-                    .then(res.status(200).send({ like: true} ))
+                    .then(res.status(200).send({ like: true } ))
                 }
             })
         .catch (error => res.status(401).json({ error }))
         }
+
+    exports.getLikes = (req, res, next) => {
+        const postId = req.params.id;
+        Likes.count({ where: { postId: postId } })
+            .then((total) => {
+                res.status(200).send({ total })
+            })
+            .catch(error => res.status(500).json({ error }))
+    }
