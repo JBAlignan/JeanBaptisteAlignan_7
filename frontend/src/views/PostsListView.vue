@@ -3,7 +3,7 @@
     <div id="body" class="d-inline-flex p-2 justify-content-center">
         <div class="row container justify-content-center">
 
-            <h2 class="col-md-9">Bonjour {{ userObject.firstName }} {{ userObject.lastName }}</h2>
+            <h2 class="col-md-9">Bonjour {{ userObject.firstName }} {{ userObject.lastName }}  {{ $store.state.userId }}</h2>
 
     <!-- Formulaire de création d'une publication -->
             <div class="form-floating col-md-9">
@@ -14,7 +14,7 @@
                 <div class="input-group mt-2">
                     <input type="file" @change="onFileSelected" class="form-control" id="postImg" aria-label="Upload">
                 </div>
-                <!-- <p class="alert alert-danger" role="alert">{{ message }}</p> -->
+                <p class="alert alert-danger emptyForm" role="alert"  v-if="emptyForm">{{ message }}</p>
 
              <!-- Bouton de publication -->   
             <button @click="postCreation" type="button" class="btn btn-primary mt-4">Publier</button>
@@ -57,6 +57,8 @@ export default {
             userId: '',
             posts: null,
             imageUrl: null,
+            message: '',
+            emptyForm: false
         }
     },
     methods:{
@@ -81,6 +83,7 @@ export default {
                         userId: this.userObject.userId,
                         imageUrl: this.imageUrl,
                     }))
+                    // Envoi de la requête de publication.
                     axios
                         .post('/posts', fd, {
                             headers : {
@@ -95,6 +98,10 @@ export default {
                         .catch((error) => {
                             console.log(error)
                     })
+            }
+            else {
+                this.message = 'Publication vide',
+                this.emptyForm = true
             }},
     },
 

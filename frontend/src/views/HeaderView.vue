@@ -30,13 +30,15 @@
     //    },
 
     computed : {
-      isLoggedIn : function(){ return this.$store.getters.isAuthenticated}
+      isLoggedIn : function(){
+        return this.$store.getters.isAuthenticated
+        }
     },
 
         methods: {
             async logout (){
-        await this.$store.dispatch('LogOut')
-        this.$router.push('/')
+            await this.$store.dispatch('LogOut')
+            this.$router.push('/')
       }
         }
     }

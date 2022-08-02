@@ -1,15 +1,17 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
 import axios from 'axios';
 
-const state = {
-    // user: null,
-    // posts: null,
-    user: [{
-    firstName: null,
-    lastName: null,
-    email: null,
-    password: null
-    }]
 
+
+const state = { 
+        userId: null,
+        firstName: null,
+        lastName: null,
+        token: null
 };
 const getters = {
     isAuthenticated: state => !!state.user,    
@@ -21,17 +23,17 @@ const actions = {
     async Signup ({dispatch}, form) {
         await axios.post('signup', form)
         let UserForm = new FormData()
+        UserForm.append('userId', form.userId)
         UserForm.append('firstName', form.firstName)
         UserForm.append('lastName', form.lastName)
-        UserForm.append('email', form.email)
-        UserForm.append('password', form.password)
+        UserForm.append('token', form.token)
         await dispatch('Login', UserForm)
     },
 
     // Connection de l'utilisateur.
     async LogIn({commit}, User) {
         await axios.post('login', User)
-        await commit ('SetUser', User.get('firstName', 'lastName'))
+        await commit ('SetUser', User.get('userId', 'firstName', 'lastName', 'token'))
     },
 
     // Déconnection de l'utilisateur.
@@ -43,14 +45,20 @@ const actions = {
 };
 const mutations = {
 
-    setUser(state, username){
-        state.user = username
+    setUser (state, userId, firstName, lastName, token){
+        state.userId = userId
+        state.firstName = firstName
+        state.lastName = lastName
+        state.token = token
+
     },
-    setPosts(state, posts){
-        state.posts = posts
-    },
-    LogOut(state){
-        state.user = null
+
+    LogOut (state){
+        state.userId = null,
+        state.firstName = null
+        state.lastName = null
+        state.token = null
+
     },
 
 };
