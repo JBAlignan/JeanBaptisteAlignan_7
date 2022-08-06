@@ -50,63 +50,61 @@
           />
         </div>
 
-        <button @click="submitSignUp" type="button" class="btn btn-success">S&#39;inscrire</button>
-
+        <button @click="submitSignUp" type="button" class="btn btn-success">
+          S&#39;inscrire
+        </button>
       </fieldset>
     </form>
   </main>
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 
-    export default {
-        name: 'SignUp',
-        data() {
-            return {
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    password: "",
-            }
-        },
-        methods:{
-            submitSignUp(){
-                 axios.post("/users/signup", {
-                  firstName: this.firstName,
-                  lastName: this.lastName,
-                  email: this.email,
-                  password: this.password
-                })
-                .then((response) => {
-                    console.log(response)
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-              }
-        },
-    
-  
-
-
+export default {
+  name: "SignUp",
+  data() {
+    return {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
     submitSignUp() {
       axios
-        .post("http://localhost:3000/api/users/signup", {
+        .post("/users/signup", {
           firstName: this.firstName,
           lastName: this.lastName,
           email: this.email,
           password: this.password,
         })
         .then((response) => {
-          console.log(response)
+          console.log(response);
         })
         .catch((error) => {
-          console.log(error)
-        })
-    }}
-  
+          console.log(error);
+        });
+    },
+  },
 
+  submitSignUp() {
+    axios
+      .post("http://localhost:3000/api/users/signup", {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        password: this.password,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+};
 </script>
 
 <style lang="scss">

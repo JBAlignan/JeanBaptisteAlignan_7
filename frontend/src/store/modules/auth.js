@@ -4,38 +4,37 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = { 
-        userId: null,
-        firstName: null,
-        lastName: null,
-        token: null
+    userId: null,
+    firstName: null,
+    lastName: null,
+    token: null
 };
+
 const getters = {
     isAuthenticated: state => !!state.user,    
     StateUser: state => state.user,
 };
-const actions = {
 
+const actions = {
     // Connection de l'utilisateur.
-    logIn({commit}, user) {
+    logIn({ commit }, user) {
         commit ("SET_USER", user)
     },
-
     // Déconnection de l'utilisateur.
-    logOut({commit}) {
+    logOut({ commit }) {
         commit ("LOGOUT")
     }
 
 };
 const mutations = {
-
-    SET_USER (state, user){
+    SET_USER (state, user) {
         state.userId = user.userId
         state.firstName = user.firstName
         state.lastName = user.lastName
         state.token = user.token
     },
 
-    LOGOUT (state){
+    LOGOUT (state) {
         state.userId = null,
         state.firstName = null
         state.lastName = null
