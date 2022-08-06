@@ -57,7 +57,7 @@ import axios from 'axios'
         name: 'OnePostView',
         data(){
             return {
-                userObject: JSON.parse(localStorage.getItem("userData")),
+                userObject: this.$store.state.auth,
                 userId: '',
                 postUserId: '',
                 postId: '',
@@ -174,7 +174,7 @@ import axios from 'axios'
                 axios
                     .post('/comments', {
                         userId: this.userObject.userId,
-                        postId: this.postId,
+                        postId: `${this.$route.params.id}`,
                         comment: this.comment,
                         }, {
                         headers: {
@@ -195,12 +195,8 @@ import axios from 'axios'
                     .get(`comments/${this.$route.params.id}`, {
                     })
                     .then((response) => {
-
                         this.comments = response.data
-
                         console.log(this.comments)
-
-                    
                     })
                     .catch((error) => {
                         console.log(error)

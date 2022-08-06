@@ -9,7 +9,7 @@
                     </h1>
                 </div>
                 <div class="col-lg-4 d-lg-flex align-items-end flex-column align-self-center">
-                    <button type="button" class="btn btn-light" v-on:click="logout">Déconnexion</button>
+                    <button type="button" class="btn btn-light" v-if="this.$store.state.auth.userId" v-on:click="logout">Déconnexion</button>
                 </div>
             </div>
         </div>
@@ -21,14 +21,6 @@
     export default {
         name: 'HeaderView',
 
-    //    data() {
-    //     return {
-    //     userId: localStorage.getItem('UserData'),
-    //     // logoutButton: false
-        
-    //     }
-    //    },
-
     computed : {
       isLoggedIn : function(){
         return this.$store.getters.isAuthenticated
@@ -37,7 +29,7 @@
 
         methods: {
             async logout (){
-            await this.$store.dispatch('LogOut')
+            await this.$store.dispatch('logOut')
             this.$router.push('/')
       }
         }

@@ -3,7 +3,7 @@
     <div id="body" class="d-inline-flex p-2 justify-content-center">
         <div class="row container justify-content-center">
 
-            <h2 class="col-md-9">Bonjour {{ userObject.firstName }} {{ userObject.lastName }}  {{ $store.state.userId }}</h2>
+            <h2 class="col-md-9">Bonjour {{ userObject.firstName }} {{ userObject.lastName }}  {{ this.$store.state.auth.userId }}</h2>
 
     <!-- Formulaire de création d'une publication -->
             <div class="form-floating col-md-9">
@@ -52,7 +52,7 @@ export default {
     data(){
 
         return {
-            userObject: JSON.parse(localStorage.getItem("userData")),
+            userObject: this.$store.state.auth,
             content: '',
             userId: '',
             posts: null,

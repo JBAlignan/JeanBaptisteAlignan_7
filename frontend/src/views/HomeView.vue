@@ -10,7 +10,7 @@
       <fieldset class="rounded py-4 px-4">
         <legend>Connexion à un compte</legend>
         <div class="mb-3 row">
-          <label for="emailLogin" class="form-label">Adresse email {{ $store.state.userId }}</label>
+          <label for="emailLogin" class="form-label">Adresse email</label>
           <input type="email" name="emailLogin" class="form-control" id="emailLogin" v-model="email">
         </div>
         <div class="mb-3 row ">
@@ -30,6 +30,7 @@
 
 import axios from 'axios'
 import router from '../router/index'
+// import store from ''
 
 export default {
   name: 'HomeView',
@@ -52,8 +53,7 @@ export default {
             this.errormessage = response.data.error;
           } else {
             console.log(response.data)
-            
-            localStorage.setItem("userData", JSON.stringify(response.data))
+            this.$store.commit("SET_USER", response.data)
             router.push({ name: 'PostsList' })
           }
         })

@@ -3,10 +3,6 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import axios from 'axios';
-
-
-
 const state = { 
         userId: null,
         firstName: null,
@@ -19,46 +15,31 @@ const getters = {
 };
 const actions = {
 
-    // Inscription et redirection de l'utilisateur après inscription.
-    async Signup ({dispatch}, form) {
-        await axios.post('signup', form)
-        let UserForm = new FormData()
-        UserForm.append('userId', form.userId)
-        UserForm.append('firstName', form.firstName)
-        UserForm.append('lastName', form.lastName)
-        UserForm.append('token', form.token)
-        await dispatch('Login', UserForm)
-    },
-
     // Connection de l'utilisateur.
-    async LogIn({commit}, User) {
-        await axios.post('login', User)
-        await commit ('SetUser', User.get('userId', 'firstName', 'lastName', 'token'))
+    logIn({commit}, user) {
+        commit ("SET_USER", user)
     },
 
     // Déconnection de l'utilisateur.
-    async LogOut({commit}) {
-        let user = null
-        commit ('logout', user)
+    logOut({commit}) {
+        commit ("LOGOUT")
     }
 
 };
 const mutations = {
 
-    setUser (state, userId, firstName, lastName, token){
-        state.userId = userId
-        state.firstName = firstName
-        state.lastName = lastName
-        state.token = token
-
+    SET_USER (state, user){
+        state.userId = user.userId
+        state.firstName = user.firstName
+        state.lastName = user.lastName
+        state.token = user.token
     },
 
-    LogOut (state){
+    LOGOUT (state){
         state.userId = null,
         state.firstName = null
         state.lastName = null
         state.token = null
-
     },
 
 };
