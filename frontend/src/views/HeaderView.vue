@@ -12,14 +12,14 @@
               ><img
                 src="../assets/groupomaniaLogoSm.png"
                 class="img-fluid"
-                alt="Groupomania"
+                alt="En-tête Groupomania"
               />
             </router-link>
             <router-link to="/" id="logo" alt="Accueil Groupomania" v-else
               ><img
                 src="../assets/groupomaniaLogoSm.png"
                 class="img-fluid"
-                alt="Groupomania"
+                alt="En-tête logo Groupomania"
               />
             </router-link>
           </h1>

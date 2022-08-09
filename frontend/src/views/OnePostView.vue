@@ -7,26 +7,26 @@
           class="img-fluid col-sm-8 col-md-10 mb-4"
           v-if="this.imageUrl"
           v-bind:src="`http://localhost:3000/images/${this.imageUrl}`"
+          alt=""
         />
       </div>
-      <div class="form-floating">
+
+      <div class="form-floating" v-if="userId === postUserId">
         <textarea
           class="form-control"
-          placeholder="Ecrivez ici"
           id="updatePost"
           style="height: 100px"
           v-model="content"
-          v-if="userId === postUserId"
         ></textarea>
-        <label for="updatePost"></label>
+        <label for="updatePost">Modifications</label>
+      </div>
 
-        <div class="position-relative" id="likeButton">
-          <!-- Bouton Like -->
-          <button @click="likeHandler" type="button" class="btn btn-info">
-            <span class="badge text-bg-secondary">{{ likesCount }}</span
-            >Like
-          </button>
-        </div>
+      <!-- Bouton Like -->
+      <div class="position-relative" id="likeButton">
+        <button @click="likeHandler" type="button" class="btn btn-info">
+          <span class="badge text-bg-secondary">{{ likesCount }}</span
+          >Like
+        </button>
       </div>
 
       <!-- Boutons de suppression et de modification-->
@@ -246,8 +246,9 @@ export default {
     // Affichage des commentaires.
     commentsDisplay() {
       axios
-        .get(`comments/${this.$route.params.id}`, {})
+        .get(`/comments/${this.$route.params.id}`, {})
         .then((response) => {
+          console.log(response.data);
           this.comments = response.data;
         })
         .catch((error) => {

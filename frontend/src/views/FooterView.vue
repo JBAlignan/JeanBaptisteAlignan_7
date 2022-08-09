@@ -7,7 +7,10 @@ export default {
 <template>
   <footer class="navbar mt-3">
     <figure>
-      <img src="../assets/groupomaniaFooter.webp" alt="Groupomania" />
+      <img
+        src="../assets/groupomaniaFooter.webp"
+        alt="Pied-de-page logo Groupomania"
+      />
     </figure>
   </footer>
 </template>

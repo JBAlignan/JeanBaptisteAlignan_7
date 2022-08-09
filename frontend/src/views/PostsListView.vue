@@ -8,13 +8,14 @@
       <!-- Formulaire de création d'une publication -->
       <div class="form-floating col-md-9">
         <textarea
+          type="text"
           class="form-control"
-          placeholder="Ecrivez ici"
+          placeholder="&#201;crivez ici"
           id="newPost"
           style="height: 100px"
           v-model="content"
         ></textarea>
-        <label for="newPost"></label>
+        <label for="newPost">&#201;crivez ici</label>
 
         <!-- Upload d'image -->
         <div class="input-group mt-2">
@@ -61,6 +62,7 @@
                   class="img-fluid col-sm-8 col-md-10 mb-4"
                   v-if="post.imageUrl"
                   v-bind:src="`http://localhost:3000/images/${post.imageUrl}`"
+                  alt=""
                 />
               </div>
               <router-link

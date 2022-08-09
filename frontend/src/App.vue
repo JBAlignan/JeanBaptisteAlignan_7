@@ -1,29 +1,27 @@
 <script>
 import HeaderView from "./views/HeaderView.vue";
-import FooterView from './views/FooterView.vue';
+import FooterView from "./views/FooterView.vue";
 
 export default {
- name: 'App',
- components: {
-   HeaderView,
-   FooterView
- }
-}
+  name: "App",
+  components: {
+    HeaderView,
+    FooterView,
+  },
+};
 </script>
-
-
 
 <template>
   <div id="app">
     <HeaderView />
     <!--Importation du "corps" de la page-->
-    <router-view/>
+    <router-view />
     <FooterView />
   </div>
 </template>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 body {
   height: 100vh;
@@ -33,7 +31,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
