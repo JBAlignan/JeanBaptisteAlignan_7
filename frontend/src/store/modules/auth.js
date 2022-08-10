@@ -7,7 +7,8 @@ const state = {
     userId: null,
     firstName: null,
     lastName: null,
-    token: null
+    token: null,
+    admin: null
 };
 
 const getters = {
@@ -36,6 +37,7 @@ const mutations = {
         state.firstName = user.firstName
         state.lastName = user.lastName
         state.token = user.token
+        state.admin = user.admin
     },
 
     LOGOUT(state) {
@@ -43,6 +45,7 @@ const mutations = {
             state.firstName = null
         state.lastName = null
         state.token = null
+        state.admin = null
     },
 
 };

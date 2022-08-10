@@ -125,8 +125,7 @@ export default {
               Authorization: `Bearer ${this.userObject.token}`,
             },
           })
-          .then((response) => {
-            console.log(response);
+          .then(() => {
             location.reload();
           })
           .catch((error) => {

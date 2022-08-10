@@ -11,7 +11,10 @@
         />
       </div>
 
-      <div class="form-floating" v-if="userId === postUserId">
+      <div
+        class="form-floating"
+        v-if="userId === postUserId || this.userObject.admin == true"
+      >
         <textarea
           class="form-control"
           id="updatePost"
@@ -35,7 +38,7 @@
           @click="updatePost"
           type="button"
           class="btn btn-primary"
-          v-if="userId === postUserId"
+          v-if="userId === postUserId || this.userObject.admin == true"
         >
           Modifier
         </button>
@@ -43,7 +46,7 @@
           @click="deletePost"
           type="button"
           class="btn btn-danger"
-          v-if="userId === postUserId"
+          v-if="userId === postUserId || this.userObject.admin == true"
         >
           Supprimer
         </button>
@@ -151,7 +154,7 @@ export default {
     // Modification d'une publication.
     updatePost() {
       this.userId = this.userObject.userId;
-      if (this.postUserId == this.userId) {
+      if (this.postUserId == this.userId || this.userObject.admin == true) {
         axios
           .put(
             `/posts/${this.$route.params.id}`,
@@ -164,8 +167,7 @@ export default {
               },
             }
           )
-          .then((response) => {
-            console.log(response);
+          .then(() => {
             this.$router.back();
           })
           .catch((error) => {
@@ -176,15 +178,14 @@ export default {
 
     // Suppression d'une publication.
     deletePost() {
-      if (this.postUserId == this.userId) {
+      if (this.postUserId == this.userId || this.userObject.admin == true) {
         axios
           .delete(`/posts/${this.$route.params.id}`, {
             headers: {
               Authorization: `Bearer ${this.userObject.token}`,
             },
           })
-          .then((response) => {
-            console.log(response);
+          .then(() => {
             this.$router.back();
           })
           .catch((error) => {
@@ -235,9 +236,7 @@ export default {
             },
           }
         )
-        .then((response) => {
-          console.log(response);
-        })
+        .then(() => {})
         .catch((error) => {
           console.log(error);
         });
@@ -248,7 +247,6 @@ export default {
       axios
         .get(`/comments/${this.$route.params.id}`, {})
         .then((response) => {
-          console.log(response.data);
           this.comments = response.data;
         })
         .catch((error) => {
